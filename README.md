@@ -8,8 +8,12 @@
 > la imagen solo es un ejemplo tu veras una pantalla similar, el enlace sera diferente entre otros detalles 
 
 ### 🌞Clona el repositorio en vscode
-> en vscode busca la opcion clonar pega el enlace copiado
+> en vscode busca la opcion clonar 
+
 ![clone](https://user-images.githubusercontent.com/87434174/159584124-6b67359d-fbee-41a0-b4cc-c7796957af47.jpg)
+> pega el enlace copiado
+![fromgit](https://user-images.githubusercontent.com/87434174/159585080-72372075-39be-48ef-af96-d0536cd40e01.jpg)
+
 
 ## 🌠 instala las dependecias
 
