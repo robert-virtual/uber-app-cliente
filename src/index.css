@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body::-webkit-scrollbar {
+  width: 0.5rem;
+  background-color: #e9e9e9;
+}
+
+body::-webkit-scrollbar-thumb {
+  width: 0.5rem;
+  border-radius: 0.25rem;
+  background-color: #3b82f6;
+}
+
+body::-webkit-scrollbar-track {
+  width: 0.5rem;
+  background-color: #e9e9e9;
+}
+
+@layer components {
+  .btn-primary {
+    @apply self-stretch bg-blue-500 p-2 text-white rounded-md  hover:scale-105 transition-all active:scale-95;
+  }
+
+  .link {
+    @apply text-xl hover:text-blue-600 transition-all;
+  }
+
+  .link-2 {
+    @apply hover:text-blue-600 transition-all text-center border-b-2 border-white hover:border-blue-50 border-solid;
+  }
+  .input {
+    @apply hover:scale-105 bg-gray-100 rounded dark:bg-gray-200 dark:text-gray-600 p-2;
+  }
+
+  .center {
+    @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
+  }
+}

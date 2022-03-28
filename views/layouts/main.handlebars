@@ -3,13 +3,23 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Uber</title>
+    <title>{{titulo}}</title>
+    <link href="/output.css" rel="stylesheet" />
   </head>
-  <body>
-    <nav>
-      <a href="/">Inicio</a>
-      <a href="/login">Login</a>
+  <body class="dark:text-white dark:bg-slate-800">
+    <nav
+      class="sticky top-0 dark:bg-slate-900 px-6 py-4 shadow-md flex items-center justify-between bg-white"
+    >
+      <div>
+
+        <a class="link" href="/">Inicio</a>
+
+      </div>
+      <a href="/login" class="btn-primary">Iniciar Session</a>
     </nav>
-    {{{body}}}
+    <div class="p-6">
+      {{{body}}}
+
+    </div>
   </body>
 </html>

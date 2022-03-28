@@ -8,7 +8,7 @@ app.set("view engine", "handlebars");
 // directorio donde estaran las vistas
 app.set("views", "./views");
 // configuracion handlebars
-
+app.use(express.static("public"));
 app.use(express.json()); // convertir json en objetos de javacript
 app.use(express.urlencoded({ extended: false })); // convertir info de formulario en objetos de javacript
 

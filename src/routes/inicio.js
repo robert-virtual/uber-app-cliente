@@ -1,14 +1,7 @@
-const router = require("express").Router();
-const users = Array.from(Array(50), (e, i) => ({
-  nombre: "Usuario " + i,
-  apellido: "Aplellido " + i,
-}));
+const { inicio } = require("../controllers/inicio");
 
-router.get("/", (req, res) => {
-  res.render("inicio", {
-    nombre: "Hola mundo handlebars",
-    users,
-  });
-});
+const router = require("express").Router();
+
+router.get("/", inicio);
 
 module.exports = router;

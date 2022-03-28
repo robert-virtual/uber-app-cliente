@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "tailwind": "npx tailwindcss -i ./src/index.css -o ./public/output.css --watch",
     "dev": "nodemon src/app.js",
     "start": "node src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -14,5 +15,8 @@
   "dependencies": {
     "express": "^4.17.3",
     "express-handlebars": "^6.0.3"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.0.23"
   }
 }
