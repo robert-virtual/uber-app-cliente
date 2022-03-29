@@ -1,10 +1,23 @@
 <html lang="es">
   <head>
+    {{! tailwind }}
+    <link href="/output.css" rel="stylesheet" />
+    {{! tailwind }}
     <meta charset="UTF-8" />
+    {{! mapbox }}
+    <script
+      src="https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js"
+    ></script>
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.css"
+      rel="stylesheet"
+    />
+
+    {{! mapbox }}
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{titulo}}</title>
-    <link href="/output.css" rel="stylesheet" />
   </head>
   <body class="dark:text-white dark:bg-slate-800">
     <nav
