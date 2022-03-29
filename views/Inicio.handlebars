@@ -7,7 +7,11 @@
     {{#each users}}
       <div class="card">
         <h3>{{this.nombre}}</h3>
-        <h4>{{this.apellido}}</h4>
+        <h4>{{this.correo}}</h4>
+        <h4>Viajes:</h4>
+        {{#each this.viajes}}
+          <h4>Fecha viaje :{{this.fecha}}</h4>
+        {{/each}}
       </div>
     {{/each}}
 
