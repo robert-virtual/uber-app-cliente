@@ -558,6 +558,15 @@ Ensure the default browser behavior of the `hidden` attribute.
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
+.search-result {
+  border-width: 2px;
+  border-top-width: 2px;
+  border-style: solid;
+  --tw-border-opacity: 1;
+  border-color: rgb(249 250 251 / var(--tw-border-opacity));
+  padding: 1rem;
+}
+
 .absolute {
   position: absolute;
 }
@@ -567,8 +576,32 @@ Ensure the default browser behavior of the `hidden` attribute.
   position: sticky;
 }
 
+.top-28 {
+  top: 7rem;
+}
+
+.left-8 {
+  left: 2rem;
+}
+
+.top-40 {
+  top: 10rem;
+}
+
+.bottom-0 {
+  bottom: 0px;
+}
+
+.right-8 {
+  right: 2rem;
+}
+
 .top-0 {
   top: 0px;
+}
+
+.z-50 {
+  z-index: 50;
 }
 
 .mb-4 {
@@ -579,16 +612,45 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: flex;
 }
 
-.h-96 {
-  height: 24rem;
+.hidden {
+  display: none;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.h-10 {
+  height: 2.5rem;
 }
 
 .w-1\/5 {
   width: 20%;
 }
 
-.w-96 {
-  width: 24rem;
+.w-full {
+  width: 100%;
+}
+
+.w-10 {
+  width: 2.5rem;
+}
+
+@-webkit-keyframes pulse {
+  50% {
+    opacity: .5;
+  }
+}
+
+@keyframes pulse {
+  50% {
+    opacity: .5;
+  }
+}
+
+.animate-pulse {
+  -webkit-animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+          animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 .flex-col {
@@ -635,6 +697,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   line-height: 2.25rem;
 }
 
+.text-black {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+
 .shadow {
   --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
@@ -645,6 +712,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+body {
+  overflow-x: hidden;
 }
 
 body::-webkit-scrollbar {
