@@ -1,6 +1,7 @@
 const express = require("express");
-const { engine } = require("express-handlebars");
+const { engine } = require("express-handlebars"); 
 const app = express();
+const session = require("express-session");
 const port = 3000;
 // configuracion handlebars
 app.engine("handlebars", engine());
