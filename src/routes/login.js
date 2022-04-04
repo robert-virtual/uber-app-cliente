@@ -1,3 +1,5 @@
+const { login } = require("../controllers/login");
+
 const router = require("express").Router();
 
 router.get("/", (req, res) => {
@@ -6,9 +8,7 @@ router.get("/", (req, res) => {
   });
 });
 
-router.post("/", (req, res) => {
-  res.redirect("/");
-});
+router.post("/", login)
 
 // exportar router
 module.exports = router;
