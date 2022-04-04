@@ -13,26 +13,26 @@ exports.login = async (req, res) => {
     console.log(buscarUsuario);
 
     if (!buscarUsuario) {
-        res.render('login');
-        return
-    }
-    let valida = verify
-    if (!buscarUsuario.verificarContrasena(clave, buscarUsuario.clave)) {
-        res.send('El usuario no existe o contrseña inválida');
+        res.send('El usuario no existe');
     }
     else {
-        const user = {
-            nombre: buscarUsuario.nombre,
-            id: buscarUsuario.id,
-            estado: buscarUsuario.estado,
-            correo: buscarUsuario.correo
+        if (!buscarUsuario.verificarContrasena(clave, buscarUsuario.clave)) {
+            res.send('El usuario no existe o contrseña inválida');
         }
-        const token = passport.getToken({ id: buscarUsuario.id });
-        console.log(buscarUsuario);
-        const data = {
-            token: token,
-            usuario: user
-        };
-        res.send('Bienvenido' + user.nombre)
+        else {
+            const user = {
+                nombre: buscarUsuario.nombre,
+                id: buscarUsuario.id,
+                estado: buscarUsuario.estado,
+                correo: buscarUsuario.correo
+            }
+            const token = passport.getToken({ id: buscarUsuario.id });
+            console.log(buscarUsuario);
+            const data = {
+                token: token,
+                usuario: user
+            };
+            res.send('Bienvenido' + user.nombre)
+        }
     }
 }
