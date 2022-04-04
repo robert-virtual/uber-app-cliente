@@ -11,8 +11,9 @@ exports.getregistro= async (req, res) => {
 exports.postregistro= async (req, res) => {
     req.body.clave = await hash(req.body.clave)
     
-    await prisma.clientes.create({
+    let buscarUsuario = await prisma.clientes.create({
         data:req.body
     })
-    res.redirect("/");
+    req.session.userid = buscarUsuario.id;
+    res.redirect("/mapa");
   }
