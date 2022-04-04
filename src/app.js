@@ -16,6 +16,7 @@ app.use(express.urlencoded({ extended: false })); // convertir info de formulari
 app.use("/", require("./routes/inicio"));
 app.use("/mapa", require("./routes/mapa"));
 app.use("/login", require("./routes/login"));
+app.use("/registro", require("./routes/registro"));
 // rurtas
 
 app.listen(port, () => {
