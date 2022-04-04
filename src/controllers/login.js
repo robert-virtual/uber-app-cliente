@@ -1,28 +1,31 @@
 const { PrismaClient } = require("@prisma/client");
 const { verify } = require("argon2");
+const { response } = require("express");
+const { request } = require("express");
 const prisma = new PrismaClient();
 
-exports.login = async (req, res) => {
-    const { correo, clave } = req.body;
+exports.login = async (req = request, res = response) => {
+  const { correo, clave } = req.body;
 
-    const buscarUsuario = await prisma.clientes.findUnique({
-        where: {
-            correo: correo,
-        }
-    });
-    console.log(buscarUsuario);
+  const usuario = await prisma.clientes.findUnique({
+    where: {
+      correo: correo,
+    },
+  });
+  console.log(usuario);
 
-    if (!buscarUsuario) {
-        res.render('login', {error:'Credeciales Incorrectas'});
-        return
-    }
+  if (!usuario) {
+    res.render("login", { error: "Credeciales Incorrectas" });
+    return;
+  }
 
-    let valido = verify(buscarUsuario.clave, clave);
+  let valido = verify(usuario.clave, clave);
 
-    if (!valido) {
-        res.render('login', {error: 'Credenciales Incorrectas'});
-        return
-    }
-    req.session.userid = buscarUsuario.id;
-    res.redirect('/mapa');
-}
+  if (!valido) {
+    res.render("login", { error: "Credenciales Incorrectas" });
+    return;
+  }
+  req.session.userid = usuario.id;
+  res.app.locals.username = usuario.nombre;
+  res.redirect("/mapa");
+};

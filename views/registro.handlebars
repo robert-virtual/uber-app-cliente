@@ -1,8 +1,14 @@
-<form action="/registro" method="post">
-    <input type='text' name='nombre' class='input'/>
-    <input type="email" name='correo' class='input'>
-    <input type="password" name='clave' class='input'>
-    <input type="password" class='input'>
-    <button>Registrarse</button>
-    <a href="/login">Login</a>
+<form
+  class="center flex flex-col gap-2 w-1/5 shadow p-6 rounded-md bg-white dark:bg-[#222]"
+  action="/registro"
+  method="post"
+>
+  <h1 class="text-3xl mb-4">Registro</h1>
+
+  <input placeholder="Nombre" type="text" name="nombre" class="input" />
+  <input placeholder="Correo" type="email" name="correo" class="input" />
+  <input placeholder="Clave" type="password" name="clave" class="input" />
+  <input placeholder="Confirmar Clave" type="password" class="input" />
+  <button class="btn-primary">Registrarse</button>
+  <a href="/login" class="link-2">Ya tengo una cuenta</a>
 </form>

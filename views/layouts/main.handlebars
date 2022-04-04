@@ -23,12 +23,16 @@
     <nav
       class="sticky top-0 dark:bg-slate-900 px-6 py-4 shadow-md flex items-center justify-between bg-white"
     >
-      <div>
+      <div class="flex flex-row items-center">
 
         <a class="link" href="/">Inicio</a>
 
       </div>
-      <a href="/login" class="btn-primary">Iniciar Session</a>
+      {{#if username}}
+        <p>{{username}}</p>
+      {{else}}
+        <a href="/login" class="btn-primary">Iniciar Session</a>
+      {{/if}}
     </nav>
     <div>
 
