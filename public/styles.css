@@ -3,7 +3,9 @@
   margin: 0;
   box-sizing: border-box;
 }
-
+body {
+  overflow-x: hidden;
+}
 img {
   object-fit: contain;
 
@@ -96,18 +98,22 @@ main .contenedor-img {
   display: inline-block;
   padding: 10px 30px;
   border-radius: 100px;
-  margin-right: 60px;
   text-decoration: none;
   background: #f2f2f2;
-  margin: 60;
+  transition: all 0.5s;
+}
+.links {
+  display: flex;
+  margin: 30px;
+  gap: 30px;
 }
 .btn-link2 {
   display: inline-block;
   padding: 10px 30px;
   border-radius: 100px;
-  margin-right: 10px;
   text-decoration: none;
   background: #f2f2f2;
+  transition: all 0.5s;
 }
 
 .btn-link:hover,
