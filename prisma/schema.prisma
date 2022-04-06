@@ -24,6 +24,7 @@ model conductores {
   nombre             String                 @db.VarChar(255)
   correo             String                 @db.VarChar(255)
   telefono           String                 @db.VarChar(8)
+  clave             String                  @db.VarChar(255)
   licenciaImagen     String?                @db.VarChar(255)
   antecedentesImagen String?                @db.VarChar(255)
   fechaRegistro      DateTime               @default(now()) @db.Timestamp(0)

@@ -12,4 +12,7 @@
     <a href="/registro?tipo={{tipo}}" class="link-2">Crear cuenta</a>
     <a href="#" class="link-2">Olvide mi contraseña</a>
   </form>
+  {{#if error}}
+    <p class="text-red-500">{{error}}</p>
+  {{/if}}
 </main>

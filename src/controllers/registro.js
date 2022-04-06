@@ -16,13 +16,27 @@ exports.getregistro = async (req = request, res = response) => {
 };
 
 exports.postregistro = async (req = request, res = response) => {
-  req.body.clave = await hash(req.body.clave);
+  const { tipo } = req.body;
+  try {
+    req.body.clave = await hash(req.body.clave);
+    let usuario;
+    if (tipo == "Conductores") {
+      usuario = await prisma.conductores.create({
+        data: req.body,
+      });
+    } else {
+      usuario = await prisma.clientes.create({
+        data: req.body,
+      });
+    }
+    req.session.userid = usuario.id;
+    res.app.locals.username = usuario.nombre;
 
-  let usuario = await prisma.clientes.create({
-    data: req.body,
-  });
-  req.session.userid = usuario.id;
-  res.app.locals.username = usuario.nombre;
-
-  res.redirect("/mapa");
+    res.redirect("/mapa");
+  } catch (error) {
+    res.render(`registro`, {
+      tipo: req.body.tipo,
+      error: error.message,
+    });
+  }
 };

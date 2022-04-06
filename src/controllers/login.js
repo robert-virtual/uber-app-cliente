@@ -6,26 +6,38 @@ const prisma = new PrismaClient();
 
 exports.login = async (req = request, res = response) => {
   const { correo, clave } = req.body;
+  try {
+    const usuario = await prisma.clientes.findUnique({
+      where: {
+        correo: correo,
+      },
+    });
+    console.log(usuario);
 
-  const usuario = await prisma.clientes.findUnique({
-    where: {
-      correo: correo,
-    },
-  });
-  console.log(usuario);
+    if (!usuario) {
+      res.render("login", {
+        tipo: req.body.tipo,
+        error: "Credeciales Incorrectas",
+      });
+      return;
+    }
 
-  if (!usuario) {
-    res.render("login", { error: "Credeciales Incorrectas" });
-    return;
+    let valido = verify(usuario.clave, clave);
+
+    if (!valido) {
+      res.render("login", {
+        tipo: req.body.tipo,
+        error: "Credenciales Incorrectas",
+      });
+      return;
+    }
+    req.session.userid = usuario.id;
+    res.app.locals.username = usuario.nombre;
+    res.redirect("/mapa");
+  } catch (error) {
+    res.render(`login`, {
+      tipo: req.body.tipo,
+      error: error.message,
+    });
   }
-
-  let valido = verify(usuario.clave, clave);
-
-  if (!valido) {
-    res.render("login", { error: "Credenciales Incorrectas" });
-    return;
-  }
-  req.session.userid = usuario.id;
-  res.app.locals.username = usuario.nombre;
-  res.redirect("/mapa");
 };
