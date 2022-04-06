@@ -1,16 +1,21 @@
+// @ts-check
 // const { Marker, Popup, Map } = require("mapbox-gl");
-const { Marker, Popup, Map } = mapboxgl;
+const { Marker, Popup, Map, LngLatBounds } = mapboxgl;
 const d = document;
 const btnMiUbicacion = d.getElementById("btn-mi-ubicacion");
 const searchBar = d.getElementById("search-bar");
 const searchrResults = d.getElementById("search-results");
+
+/**
+ * @type { mapboxgl.Map }
+ */
 let map;
 
 const mapStyles = [
   "mapbox://styles/mapbox/navigation-day-v1",
   "mapbox://styles/mapbox/streets-v11",
 ];
-let ubicacion = {};
+let ubicacion = { lat: 0, lng: 0 };
 let selectedStyle = 0;
 export function removerLoader(err = "") {
   if (err) {
@@ -74,13 +79,13 @@ function setSearchBar() {
       let res = await fetch(
         `https://api.mapbox.com/geocoding/v5/mapbox.places/${target.value}.json?country=hn&proximity=ip&types=place%2Cpostcode%2Caddress&language=es&access_token=pk.eyJ1Ijoicm9iZXJ0Y2FzdDEyIiwiYSI6ImNremp5ZHdmNTF5OG8ybm9iZ2E1bGFhODAifQ.4gKPVXpglB0fZOIE7YEI1A`
       );
-      res = await res.json();
+      let data = await res.json();
       console.log(res);
       searchrResults.innerHTML = "";
 
-      res.features.forEach(createResult);
+      data.features.forEach(createResult);
       searchrResults.classList.remove("hidden");
-      if (!res.features.length) {
+      if (!data.features.length) {
         createResult({
           text: "No se encontrarn resultados",
           place_name_es: target.value,
@@ -91,7 +96,11 @@ function setSearchBar() {
 }
 
 let markadorPrevio;
-function crearMarcador({ lat, lng }) {
+function crearMarcador({ lat, lng, kms, minutes }) {
+  const popup = new Popup({}).setHTML(`
+  <h2 style="color:black;">${minutes} Minutos</h2>
+  <h2 style="color:black;">${kms} Kilometros</h2>
+  `);
   if (markadorPrevio) {
     markadorPrevio.remove();
   }
@@ -100,6 +109,7 @@ function crearMarcador({ lat, lng }) {
     color: "#00dbc5",
   })
     .setLngLat({ lat, lng })
+    .setPopup(popup)
     .addTo(map);
   map.flyTo({
     center: { lat, lng },
@@ -107,6 +117,10 @@ function crearMarcador({ lat, lng }) {
   });
 }
 
+/**
+ *
+ * @param {{text:string,place_name_es:string,center?:[number,number]}} param0
+ */
 function createResult({ text, place_name_es, center }) {
   const t = d.createElement("template");
   t.innerHTML = `
@@ -121,10 +135,77 @@ function createResult({ text, place_name_es, center }) {
           `;
   console.log("keyup");
   if (center) {
-    t.content.querySelector("div").onclick = () => {
+    t.content.querySelector("div").onclick = async () => {
       console.log(center);
-      crearMarcador({ lat: center[1], lng: center[0] });
+      const res = await trazarRuta({ lat: center[1], lng: center[0] });
+      crearMarcador({ lat: center[1], lng: center[0], ...res });
     };
   }
   searchrResults.append(t.content);
+}
+
+let routeid;
+async function trazarRuta({ lat, lng }) {
+  let endPoint = `https://api.mapbox.com/directions/v5/mapbox/driving/${ubicacion.lng},${ubicacion.lat};${lng},${lat}?alternatives=false&geometries=geojson&overview=simplified&steps=false&access_token=pk.eyJ1Ijoicm9iZXJ0Y2FzdDEyIiwiYSI6ImNremp5ZHdmNTF5OG8ybm9iZ2E1bGFhODAifQ.4gKPVXpglB0fZOIE7YEI1A`;
+
+  const res = await fetch(endPoint);
+  const data = await res.json();
+  const { geometry, distance, duration } = data.routes[0];
+  /**
+   * @type {{coordinates:[number,number][]}}
+   */
+  const { coordinates } = geometry;
+  let kms = distance / 1000;
+  kms = Math.round(kms * 100);
+  kms /= 100;
+  let minutes = Math.floor(duration / 60);
+
+  let bounds = new LngLatBounds(ubicacion, ubicacion);
+  for (const coord of coordinates) {
+    bounds.extend(coord);
+  }
+  map.fitBounds(bounds, { padding: 200 });
+  /**
+   * @type{mapboxgl.AnySourceData}
+   */
+  const sourceData = {
+    type: "geojson",
+    data: {
+      type: "FeatureCollection",
+      features: [
+        {
+          type: "Feature",
+          properties: {},
+          geometry: {
+            type: "LineString",
+            coordinates,
+          },
+        },
+      ],
+    },
+  };
+  // remover direccion  si ya existe
+  if (map.getLayer(routeid)) {
+    map.removeLayer(routeid);
+    map.removeSource(routeid);
+  }
+  routeid = "RouteString";
+  map.addSource(routeid, sourceData);
+  map.addLayer({
+    id: routeid,
+    type: "line",
+    source: routeid,
+    layout: {
+      "line-cap": "round",
+      "line-join": "round",
+    },
+    paint: {
+      "line-color": "#3b82f6",
+      "line-width": 3,
+    },
+  });
+  return {
+    minutes,
+    kms,
+  };
 }
