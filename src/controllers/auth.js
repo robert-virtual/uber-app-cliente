@@ -24,7 +24,6 @@ exports.login = async (req = request, res = response) => {
         },
       });
     }
-    console.log(usuario);
 
     if (!usuario) {
       res.render("login", {
@@ -34,7 +33,7 @@ exports.login = async (req = request, res = response) => {
       return;
     }
 
-    let valido = verify(usuario.clave, clave);
+    let valido = await verify(usuario.clave, clave);
 
     if (!valido) {
       res.render("login", {
@@ -48,7 +47,7 @@ exports.login = async (req = request, res = response) => {
 
     res.redirect("/mapa");
   } catch (error) {
-    res.render(`login`, {
+    res.render("login", {
       tipo: req.body.tipo,
       error:
         "Lo sentimos ha habido un error al realizar la peticion vuelva a intentar mas tarde",
