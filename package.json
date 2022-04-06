@@ -2,13 +2,11 @@
   "name": "uber-app-cliente",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/app.js",
   "scripts": {
-    "prestart": "npx tailwindcss -i ./src/index.css -o ./public/output.css",
     "tailwind": "npx tailwindcss -i ./src/index.css -o ./public/output.css --watch",
     "dev": "nodemon src/app.js",
-    "start": "node src/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/app.js"
   },
   "keywords": [],
   "author": "",
@@ -18,8 +16,7 @@
     "argon2": "^0.28.5",
     "express": "^4.17.3",
     "express-handlebars": "^6.0.3",
-    "express-session": "^1.17.2",
-    "mapbox-gl": "^2.7.1"
+    "express-session": "^1.17.2"
   },
   "devDependencies": {
     "dotenv": "^16.0.0",
