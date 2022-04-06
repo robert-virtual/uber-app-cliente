@@ -55,12 +55,12 @@ app.use(
   })
 );
 
-// rurtas
+// rutas
 app.use("/", require("./routes/inicio"));
 app.use("/mapa", require("./routes/mapa"));
 app.use("/login", require("./routes/login"));
 app.use("/registro", require("./routes/registro"));
-// rurtas
+// rutas
 
 app.listen(port, () => {
   console.log("aplicacion ejecutandose en el puerto: ", port);
