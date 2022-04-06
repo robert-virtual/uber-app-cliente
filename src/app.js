@@ -1,11 +1,21 @@
-const session = require('express-session');
+const session = require("express-session");
 const express = require("express");
 const { engine } = require("express-handlebars");
-const { cookiename } = require('./constantes');
+const { cookiename } = require("./constantes");
 const app = express();
 const port = 3000;
-if(process.env.NODE_ENV != 'production'){
-  require('dotenv').config();
+
+let RedisStore = require("connect-redis")(session);
+// redis@v4
+const { createClient } = require("redis");
+let redisClient = createClient({
+  legacyMode: true,
+  url: process.env.REDIS_URL,
+});
+redisClient.connect().catch(console.error);
+
+if (process.env.NODE_ENV != "production") {
+  require("dotenv").config();
 }
 
 // configuracion handlebars
@@ -18,20 +28,25 @@ app.use(express.static("public"));
 app.use(express.json()); // convertir json en objetos de javacript
 app.use(express.urlencoded({ extended: false })); // convertir info de formulario en objetos de javacript
 
-
 //configuracion sesion
-app.use(session({
-  name: cookiename,
-  cookie: {
-    maxAge: 1000*60*60*24*365,
-    httpOnly: true,
-    secure: process.env.NODE_ENV == 'production',
-    sameSite: 'lax',
-  },
-  saveUninitialized: false,
-  secret: process.env.COOKIE_SECRET,
-  resave: false,
-}))
+app.use(
+  session({
+    name: cookiename,
+    store: new RedisStore({
+      client: redisClient,
+      disableTouch: true,
+    }),
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24 * 365,
+      httpOnly: true,
+      secure: process.env.NODE_ENV == "production",
+      sameSite: "lax",
+    },
+    saveUninitialized: false,
+    secret: process.env.COOKIE_SECRET,
+    resave: false,
+  })
+);
 
 // rurtas
 app.use("/", require("./routes/inicio"));
