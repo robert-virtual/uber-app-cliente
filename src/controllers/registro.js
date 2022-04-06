@@ -1,8 +1,8 @@
 const { PrismaClient } = require("@prisma/client");
+const prisma = new PrismaClient();
 const { hash } = require("argon2");
 const { response } = require("express");
 const { request } = require("express");
-const prisma = new PrismaClient();
 
 exports.getregistro = async (req = request, res = response) => {
   const { tipo } = req.query;
@@ -31,7 +31,7 @@ exports.postregistro = async (req = request, res = response) => {
       });
     }
     req.session.userid = usuario.id;
-    res.app.locals.username = usuario.nombre;
+    req.session.tipoUser = tipo;
 
     res.redirect("/mapa");
   } catch (error) {

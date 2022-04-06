@@ -1,3 +1,5 @@
+const { PrismaClient } = require("@prisma/client");
+const prisma = new PrismaClient();
 const express = require("express");
 const app = express();
 const { cookiename, __prod__ } = require("./constantes");
@@ -43,6 +45,30 @@ app.use(
 );
 
 // rutas
+app.use(async (req, _, next) => {
+  if (req.session.userid) {
+    let { tipoUser } = req.session;
+    let usuario;
+    if (tipoUser == "Conductores") {
+      usuario = await prisma.conductores.findUnique({
+        where: {
+          id: req.session.userid,
+        },
+      });
+    } else {
+      usuario = await prisma.clientes.findUnique({
+        where: {
+          id: req.session.userid,
+        },
+      });
+    }
+    app.locals.username = usuario.nombre;
+    next();
+    return;
+  }
+  app.locals.username = undefined;
+  next();
+});
 app.use("/", require("./routes/inicio"));
 app.use("/", require("./routes/auth"));
 app.use("/mapa", require("./routes/mapa"));
