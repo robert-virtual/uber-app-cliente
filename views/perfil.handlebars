@@ -1,0 +1,67 @@
+<form
+  id="form"
+  class="flex flex-col p-4 items-start gap-4"
+  action="/perfil"
+  method="post"
+  enctype="multipart/form-data"
+>
+  <label for="img" class="w-40">
+    {{#if usuario.imagen}}
+      <img src="/{{usuario.imagen}}" class="w-40 rounded-full" alt="perfil" />
+    {{else}}
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+        ></path>
+      </svg>
+    {{/if}}
+
+  </label>
+  <input type="file" id="img" name="img" hidden />
+  <input
+    required
+    placeholder="Nombre"
+    type="text"
+    name="nombre"
+    value="{{usuario.nombre}}"
+    class="input"
+  />
+  <input
+    required
+    placeholder="Correo"
+    type="email"
+    name="correo"
+    value="{{usuario.correo}}"
+    class="input"
+  />
+  <textarea
+    required
+    placeholder="Direccion"
+    name="direccion"
+    cols="30"
+    rows="10"
+    value="{{usuario.direccion}}"
+    class="input"
+  ></textarea>
+  <input
+    required
+    placeholder="Telefono"
+    class="input"
+    type="tel"
+    value="{{usuario.telefono}}"
+    name="telefono"
+  />
+  <button class="btn-primary bg-white text-black self-start">Actualizar</button>
+</form>
+{{#if error}}
+  <p class="text-red-500 text-center">{{error}}</p>
+{{/if}}

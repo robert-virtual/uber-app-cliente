@@ -14,6 +14,7 @@ model clientes {
   clave         String  @db.VarChar(255)
   correo        String  @unique @db.VarChar(320)
   direccion     String?  @db.VarChar(255)
+  imagen        String?  
   telefono      String?  @db.VarChar(8)
   fechaRegistro DateTime @default(now()) @db.Timestamp(0)
   viajes        viajes[]
@@ -28,7 +29,7 @@ model conductores {
   licenciaImagen     String?                @db.VarChar(255)
   antecedentesImagen String?                @db.VarChar(255)
   fechaRegistro      DateTime               @default(now()) @db.Timestamp(0)
-  Imagen             String?                @db.VarChar(255)
+  imagen             String?                @db.VarChar(255)
   tipoCarro          conductores_tipoCarro? @default(normal)
   estado             Boolean               @default(true)
   viajes             viajes[]

@@ -21,6 +21,7 @@ app.set("view engine", "handlebars");
 app.set("views", "./views");
 // configuracion handlebars
 app.use(express.static("public"));
+app.use(express.static("uploads"));
 app.use(express.json()); // convertir json en objetos de javacript
 app.use(express.urlencoded({ extended: false })); // convertir info de formulario en objetos de javacript
 
@@ -74,6 +75,7 @@ app.use("/", require("./routes/inicio"));
 app.use("/", require("./routes/auth"));
 app.use("/mapa", require("./routes/mapa"));
 app.use("/registro", require("./routes/registro"));
+app.use("/perfil", require("./routes/perfil"));
 // rutas
 
 app.listen(port, () => {
