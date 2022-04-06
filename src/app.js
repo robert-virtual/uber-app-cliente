@@ -3,7 +3,7 @@ const express = require("express");
 const { engine } = require("express-handlebars");
 const { cookiename } = require("./constantes");
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 let RedisStore = require("connect-redis")(session);
 // redis@v4
@@ -12,7 +12,14 @@ let redisClient = createClient({
   legacyMode: true,
   url: process.env.REDIS_URL,
 });
-redisClient.connect().catch(console.error);
+redisClient
+  .connect()
+  .then(() => {
+    console.log("redisClient creado con exito");
+  })
+  .catch((err) => {
+    console.error(err);
+  });
 
 if (process.env.NODE_ENV != "production") {
   require("dotenv").config();
