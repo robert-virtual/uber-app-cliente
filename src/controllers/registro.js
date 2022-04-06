@@ -17,6 +17,7 @@ exports.getregistro = async (req = request, res = response) => {
 
 exports.postregistro = async (req = request, res = response) => {
   const { tipo } = req.body;
+  delete req.body.tipo;
   try {
     req.body.clave = await hash(req.body.clave);
     let usuario;
@@ -34,9 +35,16 @@ exports.postregistro = async (req = request, res = response) => {
 
     res.redirect("/mapa");
   } catch (error) {
+    let correoError;
+    if (error.message.includes("correo")) {
+      correoError =
+        "El correo proporcionado ya esta vinculado a una cuenta intente iniciar session";
+    }
+    console.warn(error);
     res.render(`registro`, {
       tipo: req.body.tipo,
       error:
+        correoError ||
         "Lo sentimos ha habido un error al realizar la peticion vuelva a intentar mas tarde",
     });
   }

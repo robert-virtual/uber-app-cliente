@@ -2,6 +2,7 @@ const { PrismaClient } = require("@prisma/client");
 const { verify } = require("argon2");
 const { response } = require("express");
 const { request } = require("express");
+const { cookiename } = require("../constantes");
 const prisma = new PrismaClient();
 
 exports.login = async (req = request, res = response) => {
@@ -41,4 +42,17 @@ exports.login = async (req = request, res = response) => {
         "Lo sentimos ha habido un error al realizar la peticion vuelva a intentar mas tarde",
     });
   }
+};
+
+exports.logout = (req = request, res = response) => {
+  req.session.destroy((err) => {
+    if (err) {
+      res.render("mapa", {
+        error: "no se pudo cerra la session intente mas tarde",
+      });
+      return;
+    }
+    res.clearCookie(cookiename);
+    res.redirect("/");
+  });
 };

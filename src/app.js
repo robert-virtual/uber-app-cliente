@@ -44,8 +44,8 @@ app.use(
 
 // rutas
 app.use("/", require("./routes/inicio"));
+app.use("/", require("./routes/auth"));
 app.use("/mapa", require("./routes/mapa"));
-app.use("/login", require("./routes/login"));
 app.use("/registro", require("./routes/registro"));
 // rutas
 
