@@ -1,29 +1,16 @@
+const { cookiename, __prod__ } = require("./constantes");
+if (!__prod__) {
+  require("dotenv").config();
+}
 const session = require("express-session");
 const express = require("express");
 const { engine } = require("express-handlebars");
-const { cookiename, __prod__ } = require("./constantes");
 const app = express();
 const port = process.env.PORT || 3000;
 
 let RedisStore = require("connect-redis")(session);
-// redis@v4
-const { createClient } = require("redis");
-let redisClient = createClient({
-  legacyMode: true,
-  url: process.env.REDIS_URL,
-});
-redisClient
-  .connect()
-  .then(() => {
-    console.log("redisClient creado con exito");
-  })
-  .catch((err) => {
-    console.error("redisClient:", err);
-  });
-
-if (!__prod__) {
-  require("dotenv").config();
-}
+const Redis = require("ioredis");
+let redisClient = new Redis(process.env.REDIS_URL);
 
 // configuracion handlebars
 app.engine("handlebars", engine());
