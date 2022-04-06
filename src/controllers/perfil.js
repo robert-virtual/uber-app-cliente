@@ -41,9 +41,8 @@ exports.getPerfil = async (req = request, res = response) => {
   if (!req.session.userid) {
     return res.redirect("/");
   }
-  let { tipoUser } = req.session;
   let usuario;
-  if (tipoUser == "Conductores") {
+  if (req.session.conductor) {
     usuario = await prisma.conductores.findUnique({
       where: {
         id: req.session.userid,
@@ -58,6 +57,6 @@ exports.getPerfil = async (req = request, res = response) => {
   }
   res.render("perfil", {
     usuario,
-    conductor: tipoUser == "Conductores",
+    conductor: req.session.conductor,
   });
 };
