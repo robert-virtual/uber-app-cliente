@@ -8,10 +8,11 @@ datasource db {
 }
 
 model clientes {
-  id            Int      @id @unique(map: "id") @default(autoincrement())
-  estado        Boolean? @default(dbgenerated("b'1'")) @db.Bit(1)
+  id            Int      @id @default(autoincrement())
+  estado        Boolean  @default(true)
   nombre        String?  @db.VarChar(255)
-  correo        String?  @db.VarChar(320)
+  clave         String  @db.VarChar(255)
+  correo        String  @unique @db.VarChar(320)
   direccion     String?  @db.VarChar(255)
   telefono      String?  @db.VarChar(8)
   fechaRegistro DateTime @default(now()) @db.Timestamp(0)
@@ -28,7 +29,7 @@ model conductores {
   fechaRegistro      DateTime               @default(now()) @db.Timestamp(0)
   Imagen             String?                @db.VarChar(255)
   tipoCarro          conductores_tipoCarro? @default(normal)
-  estado             Boolean?               @default(dbgenerated("b'1'")) @db.Bit(1)
+  estado             Boolean               @default(true)
   viajes             viajes[]
 }
 
@@ -49,23 +50,23 @@ model usuarios {
   nombre String   @db.VarChar(255)
   correo String   @db.VarChar(320)
   clave  String   @db.VarChar(255)
-  estado Boolean? @default(dbgenerated("b'1'")) @db.Bit(1)
+  estado Boolean @default(true) 
   quejas quejas[]
 }
 
 model viajes {
   id                   Int                @id @default(autoincrement())
-  clienteId            Int?
+  clienteId            Int
   descripcion          String?            @db.VarChar(255)
   destino              String?            @db.VarChar(255)
   fecha                DateTime?          @default(now()) @db.Timestamp(0)
   duracion             String?            @db.VarChar(255)
-  conductorId          Int?
-  monto                Float              @db.Float
-  porcentajeDeducccion Float              @db.Float
-  metodoPago           viajes_metodoPago?
-  clientes             clientes?          @relation(fields: [clienteId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "viajes_ibfk_2")
-  conductores          conductores?       @relation(fields: [conductorId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "viajes_ibfk_1")
+  conductorId          Int
+  monto                Float              
+  porcentajeDeducccion Float              
+  metodoPago           viajes_metodoPago @default(Efectivo)
+  clientes             clientes          @relation(fields: [clienteId], references: [id])
+  conductores          conductores       @relation(fields: [conductorId], references: [id])
   quejas               quejas[]
 
   @@index([conductorId], map: "viajes_ibfk_1")

@@ -600,6 +600,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   top: 0px;
 }
 
+.bottom-10 {
+  bottom: 2.5rem;
+}
+
 .z-50 {
   z-index: 50;
 }
@@ -624,6 +628,22 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 2.5rem;
 }
 
+.h-\[6vh\] {
+  height: 6vh;
+}
+
+.h-\[94vh\] {
+  height: 94vh;
+}
+
+.h-\[90vh\] {
+  height: 90vh;
+}
+
+.h-\[10vh\] {
+  height: 10vh;
+}
+
 .w-1\/5 {
   width: 20%;
 }
@@ -634,6 +654,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .w-10 {
   width: 2.5rem;
+}
+
+.w-\[\] {
+  width: ;
 }
 
 @-webkit-keyframes pulse {
@@ -651,6 +675,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .animate-pulse {
   -webkit-animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
           animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.flex-row {
+  flex-direction: row;
 }
 
 .flex-col {
