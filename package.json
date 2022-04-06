@@ -5,8 +5,8 @@
   "main": "src/app.js",
   "scripts": {
     "tailwind": "npx tailwindcss -i ./src/index.css -o ./public/output.css --watch",
-    "dev": "nodemon src/app.js",
-    "start": "node src/app.js"
+    "dev": "nodemon .",
+    "start": "node ."
   },
   "keywords": [],
   "author": "",
