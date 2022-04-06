@@ -1,10 +1,15 @@
 <form
   id="form"
-  class="center flex flex-col gap-2 md:w-1/5 shadow p-6 rounded-md bg-white dark:bg-[#222]"
+  class="center flex flex-col gap-2 lg:w-1/5 shadow p-6 rounded-md bg-white dark:text-black dark:bg-white"
   action="/registro"
   method="post"
 >
-  <h1 class="text-3xl mb-4">Registro {{tipo}}</h1>
+  <div
+    class="bg-[#222] text-white w-32 place-items-center h-32 grid m-auto p-4"
+  >
+    <span class="text-3xl">Uber</span>
+  </div>
+  <h1 class="text-3xl mb-4 text-center">Registro {{tipo}}</h1>
   <input type="text" name="tipo" value="{{tipo}}" hidden />
 
   <input
@@ -30,7 +35,7 @@
   />
   <input required placeholder="Confirmar Clave" type="password" class="input" />
   <button class="btn-primary">Registrarse</button>
-  <a href="/login?{{tipo}}" class="link-2">Ya tengo una cuenta</a>
+  <a href="/login?tipo={{tipo}}" class="link-2">Ya tengo una cuenta</a>
 </form>
 {{#if error}}
   <p class="text-red-500 text-center">{{error}}</p>
