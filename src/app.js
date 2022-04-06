@@ -1,7 +1,7 @@
 const session = require("express-session");
 const express = require("express");
 const { engine } = require("express-handlebars");
-const { cookiename } = require("./constantes");
+const { cookiename, __prod__ } = require("./constantes");
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -21,7 +21,7 @@ redisClient
     console.error(err);
   });
 
-if (process.env.NODE_ENV != "production") {
+if (!__prod__) {
   require("dotenv").config();
 }
 
@@ -46,7 +46,7 @@ app.use(
     cookie: {
       maxAge: 1000 * 60 * 60 * 24 * 365,
       httpOnly: true,
-      secure: process.env.NODE_ENV == "production",
+      secure: __prod__,
       sameSite: "lax",
     },
     saveUninitialized: false,
