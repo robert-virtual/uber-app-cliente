@@ -37,7 +37,7 @@ exports.postregistro = async (req = request, res = response) => {
     res.render(`registro`, {
       tipo: req.body.tipo,
       error:
-        "Lo sentimos ha habido un error al relaizar la peticion vuelva a intentar mas tarde",
+        "Lo sentimos ha habido un error al realizar la peticion vuelva a intentar mas tarde",
     });
   }
 };
