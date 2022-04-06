@@ -3,11 +3,14 @@ const { request } = require("express");
 const { response } = require("express");
 const prisma = new PrismaClient();
 exports.getConductores = async (req = request, res = response) => {
-  prisma.conductores.findMany({
+  const conductores = await prisma.conductores.findMany({
     select: {
       imagen: true,
       nombre: true,
       tipoCarro: true,
+      correo: true,
+      telefono: true,
     },
   });
+  res.json(conductores);
 };

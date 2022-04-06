@@ -76,6 +76,7 @@ app.use("/", require("./routes/auth"));
 app.use("/mapa", require("./routes/mapa"));
 app.use("/registro", require("./routes/registro"));
 app.use("/perfil", require("./routes/perfil"));
+app.use("/conductores", require("./routes/conductores"));
 // rutas
 
 app.listen(port, () => {
