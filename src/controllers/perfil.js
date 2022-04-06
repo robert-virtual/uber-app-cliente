@@ -31,6 +31,7 @@ exports.postPerfil = async (req = request, res = response) => {
       usuario,
     });
   } catch (error) {
+    console.log(error);
     res.render("perfil", {
       error: "Lo sentimo ha ocurrido un error intente mas tarde",
     });
