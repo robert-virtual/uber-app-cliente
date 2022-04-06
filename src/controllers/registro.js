@@ -4,9 +4,14 @@ const { response } = require("express");
 const { request } = require("express");
 const prisma = new PrismaClient();
 
-exports.getregistro = async (req, res) => {
+exports.getregistro = async (req = request, res = response) => {
+  const { tipo } = req.query;
+  if (!tipo) {
+    return res.redirect("/");
+  }
   res.render("registro", {
     titulo: "Registro",
+    tipo,
   });
 };
 
