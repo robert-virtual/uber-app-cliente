@@ -58,6 +58,6 @@ exports.getPerfil = async (req = request, res = response) => {
   }
   res.render("perfil", {
     usuario,
-    tipos: tipoUser,
+    conductor: tipoUser == "Conductores",
   });
 };
