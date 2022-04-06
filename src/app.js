@@ -1,12 +1,18 @@
-const session = require('express-session');
+const { PrismaClient } = require("@prisma/client");
+const prisma = new PrismaClient();
 const express = require("express");
-const { engine } = require("express-handlebars");
-const { cookiename } = require('./constantes');
 const app = express();
-const port = 3000;
-if(process.env.NODE_ENV != 'production'){
-  require('dotenv').config();
+const { cookiename, __prod__ } = require("./constantes");
+if (!__prod__) {
+  require("dotenv").config();
 }
+const session = require("express-session");
+const { engine } = require("express-handlebars");
+const port = process.env.PORT || 3000;
+
+let RedisStore = require("connect-redis")(session);
+const Redis = require("ioredis");
+let redisClient = new Redis(process.env.REDIS_URL);
 
 // configuracion handlebars
 app.engine("handlebars", engine());
@@ -18,28 +24,58 @@ app.use(express.static("public"));
 app.use(express.json()); // convertir json en objetos de javacript
 app.use(express.urlencoded({ extended: false })); // convertir info de formulario en objetos de javacript
 
-
 //configuracion sesion
-app.use(session({
-  name: cookiename,
-  cookie: {
-    maxAge: 1000*60*60*24*365,
-    httpOnly: true,
-    secure: process.env.NODE_ENV == 'production',
-    sameSite: 'lax',
-  },
-  saveUninitialized: false,
-  secret: process.env.COOKIE_SECRET,
-  resave: false,
-}))
+app.use(
+  session({
+    name: cookiename,
+    store: new RedisStore({
+      client: redisClient,
+      disableTouch: true,
+    }),
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24 * 365,
+      httpOnly: true,
+      secure: __prod__,
+      sameSite: "lax",
+    },
+    saveUninitialized: false,
+    secret: process.env.COOKIE_SECRET,
+    resave: false,
+  })
+);
 
-// rurtas
+// rutas
+app.use(async (req, _, next) => {
+  if (req.session.userid) {
+    let { tipoUser } = req.session;
+    let usuario;
+    if (tipoUser == "Conductores") {
+      usuario = await prisma.conductores.findUnique({
+        where: {
+          id: req.session.userid,
+        },
+      });
+    } else {
+      usuario = await prisma.clientes.findUnique({
+        where: {
+          id: req.session.userid,
+        },
+      });
+    }
+    app.locals.username = usuario.nombre;
+    next();
+    return;
+  }
+  app.locals.username = undefined;
+  next();
+});
 app.use("/", require("./routes/inicio"));
+app.use("/", require("./routes/auth"));
 app.use("/mapa", require("./routes/mapa"));
-app.use("/login", require("./routes/login"));
 app.use("/registro", require("./routes/registro"));
+
 app.use("/ayuda", require("./routes/ayuda"));
-// rurtas
+
 
 app.listen(port, () => {
   console.log("aplicacion ejecutandose en el puerto: ", port);

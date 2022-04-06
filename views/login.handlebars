@@ -1,14 +1,35 @@
 <main>
   <form
-    class="center flex flex-col gap-2 w-1/5 shadow p-6 rounded-md bg-white dark:bg-[#222]"
+    class="center flex flex-col gap-2 lg:w-1/5 shadow p-6 rounded-md bg-white dark:bg-white"
     action="/login"
     method="post"
   >
-    <h1 class="text-3xl mb-4">Login</h1>
-    <input class="input" placeholder="Correo" type="email" name="correo" />
-    <input class="input" placeholder="Clave" type="password" name="clave" />
+    <div
+      class="bg-[#222] text-white w-32 place-items-center h-32 grid m-auto p-4"
+    >
+      <span class="text-3xl">Uber</span>
+    </div>
+    <h1 class="m-auto text-3xl mb-4 dark:text-black">Login {{tipo}}</h1>
+    <input type="text" name="tipo" value="{{tipo}}" hidden />
+    <input
+      required
+      class="input"
+      placeholder="Correo"
+      type="email"
+      name="correo"
+    />
+    <input
+      required
+      class="input"
+      placeholder="Clave"
+      type="password"
+      name="clave"
+    />
     <button class="btn-primary">Entrar</button>
-    <a href="/registro" class="link-2">Crear cuenta</a>
+    <a href="/registro?tipo={{tipo}}" class="link-2">Crear cuenta</a>
     <a href="#" class="link-2">Olvide mi contraseña</a>
   </form>
+  {{#if error}}
+    <p class="text-red-500 text-center">{{error}}</p>
+  {{/if}}
 </main>

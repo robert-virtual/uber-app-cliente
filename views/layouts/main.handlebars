@@ -4,36 +4,45 @@
     <link href="/output.css" rel="stylesheet" />
     {{! tailwind }}
     <meta charset="UTF-8" />
-    {{! mapbox }}
-    <script
-      src="https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js"
-    ></script>
-    <link
-      href="https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.css"
-      rel="stylesheet"
-    />
+    {{#if mapa}}
+      {{! mapbox }}
+      <script
+        src="https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js"
+      ></script>
+      <link
+        href="https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.css"
+        rel="stylesheet"
+      />
 
-    {{! mapbox }}
+      {{! mapbox }}
+    {{/if}}
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{titulo}}</title>
   </head>
-  <body class="dark:text-white dark:bg-slate-800">
+  <body class="dark:text-white dark:bg-[#222]">
     <nav
-      class="sticky top-0 dark:bg-slate-900 px-6 py-4 shadow-md flex items-center justify-between bg-white h-[10vh]"
+      class="sticky top-0 dark:bg-black px-6 py-4 shadow-md flex items-center justify-between bg-white h-[10vh]"
     >
       <div class="flex flex-row items-center">
 
-        <a class="link" href="/">Inicio</a>
+        <a class="link" href="/">Uber</a>
 
       </div>
-      {{#if username}}
-        <p>{{username}}</p>
-      {{else}}
-        <a href="/login" class="btn-primary">Iniciar Session</a>
-      {{/if}}
+
     </nav>
+    {{#if username}}
+      <p class="peer absolute top-7 right-5">{{username}}</p>
+      <div
+        style="transition: all 1s;"
+        class="flex flex-col items-center justify-center hover:right-0 shadow-md rounded-md h-[50vh] w-80 z-50 -right-full peer-hover:right-0 bg-white p-4 absolute top-20"
+      >
+        <a href="/perfil" class="link-black">Perfil</a>
+        <a href="/otro" class="link-black">Otro Link</a>
+        <a href="/logout" class="btn-primary">Cerrar Session</a>
+      </div>
+    {{/if}}
     <div>
 
       {{{body}}}

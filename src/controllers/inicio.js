@@ -1,5 +1,5 @@
 exports.inicio = async (req, res) => {
-  res.render("inicio", {
+  res.render("Inicio", {
     titulo: "Inicio",
   });
 };
