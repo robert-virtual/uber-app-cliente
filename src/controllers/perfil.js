@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 exports.postPerfil = async (req = request, res = response) => {
   let { tipoUser } = req.session;
-  console.log(req.body);
+  console.log("postPerfil: body:", req.body);
   try {
     if (req.file) {
       req.body.imagen = req.file.filename;
@@ -13,7 +13,6 @@ exports.postPerfil = async (req = request, res = response) => {
     if (tipoUser == "Conductores") {
       usuario = await prisma.conductores.update({
         data: req.body,
-
         where: {
           id: req.session.userid,
         },
@@ -26,13 +25,14 @@ exports.postPerfil = async (req = request, res = response) => {
         },
       });
     }
+    console.log("postPerfil: usuario:");
     console.log(usuario);
     res.render("perfil", {
       usuario,
     });
   } catch (error) {
     res.render("perfil", {
-      error: "Lo sentimo ha ocuurido un error intente mas tarde",
+      error: "Lo sentimo ha ocurrido un error intente mas tarde",
     });
   }
 };
