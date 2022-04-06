@@ -1,0 +1,22 @@
+{{#if viajes}}
+  {{#each viajes}}
+    <div class="card shadow-md bg-gray-600 w-11/12">
+      <p>{{this.clientes.nombre}}</p>
+      <div class="flex gap-2">
+        <span>conductor:</span>
+        <img src="/{{this.conductores.imagen}}" class="w-10" alt="" />
+        <span>|</span>
+        <p>{{this.conductores.nombre}}</p>
+        <span>|</span>
+        <p>{{this.conductores.tipoCarro}}</p>
+        <span>|</span>
+        <p>{{this.conductores.telefono}}</p>
+
+      </div>
+      <p>{{this.destino}}</p>
+    </div>
+  {{/each}}
+
+{{else}}
+  <p class="center">Aun no hay viajes</p>
+{{/if}}

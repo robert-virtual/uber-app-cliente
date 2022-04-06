@@ -1,4 +1,4 @@
-const { getConductores } = require("../controllers/conductores");
+const { getConductores, postViaje } = require("../controllers/conductores");
 
 const router = require("express").Router();
 

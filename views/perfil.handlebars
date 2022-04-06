@@ -64,12 +64,12 @@
     value="{{usuario.telefono}}"
     name="telefono"
   />
-    {{#if conductor}}
+  {{#if conductor}}
     <select name="tipoCoche">
       <option value="normal">Normal</option>
       <option value="lujo">Lujo</option>
     </select>
-    {{else}}
+  {{/if}}
   <button class="btn-primary bg-white text-black self-start">Actualizar</button>
 </form>
 {{#if error}}

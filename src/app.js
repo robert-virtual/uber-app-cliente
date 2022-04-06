@@ -49,9 +49,9 @@ app.use(
 // rutas
 app.use(async (req, _, next) => {
   if (req.session.userid) {
-    let { tipoUser } = req.session;
+    let { conductor } = req.session;
     let usuario;
-    if (tipoUser == "Conductores") {
+    if (conductor) {
       usuario = await prisma.conductores.findUnique({
         where: {
           id: req.session.userid,
@@ -65,6 +65,8 @@ app.use(async (req, _, next) => {
       });
     }
     app.locals.username = usuario.nombre;
+    app.locals.cliente = !conductor;
+    app.locals.conductor = conductor;
     next();
     return;
   }
@@ -77,6 +79,7 @@ app.use("/mapa", require("./routes/mapa"));
 app.use("/registro", require("./routes/registro"));
 app.use("/perfil", require("./routes/perfil"));
 app.use("/conductores", require("./routes/conductores"));
+app.use("/viajes", require("./routes/viajes"));
 // rutas
 
 app.listen(port, () => {

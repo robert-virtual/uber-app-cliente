@@ -65,9 +65,9 @@ model viajes {
   fecha                DateTime?          @default(now()) @db.Timestamp(0)
   duracion             String?            @db.VarChar(255)
   conductorId          Int
-  monto                Float              
-  porcentajeDeducccion Float              
-  metodoPago           viajes_metodoPago @default(Efectivo)
+  monto                Float?              
+  porcentajeDeducccion Float?              
+  metodoPago           viajes_metodoPago? 
   clientes             clientes          @relation(fields: [clienteId], references: [id])
   conductores          conductores       @relation(fields: [conductorId], references: [id])
   quejas               quejas[]

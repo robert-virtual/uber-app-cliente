@@ -43,7 +43,8 @@ exports.login = async (req = request, res = response) => {
       return;
     }
     req.session.userid = usuario.id;
-    req.session.tipoUser = tipo;
+    req.session.cliente = tipo != "Conductores";
+    req.session.conductor = tipo == "Conductores";
 
     res.redirect("/mapa");
   } catch (error) {

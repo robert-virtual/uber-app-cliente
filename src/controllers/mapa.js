@@ -1,5 +1,5 @@
 exports.getMapa = (req, res) => {
-  if (!req.session.userid) {
+  if (!req.session.userid || req.session.conductor) {
     // si estamos en produccion y no hay una session iniciada
     // redirigimos al usuario a el inicio ya que no tiene
     // permiso para acceder a esta pagina
