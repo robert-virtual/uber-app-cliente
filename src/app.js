@@ -1,11 +1,11 @@
+const express = require("express");
+const app = express();
 const { cookiename, __prod__ } = require("./constantes");
 if (!__prod__) {
   require("dotenv").config();
 }
 const session = require("express-session");
-const express = require("express");
 const { engine } = require("express-handlebars");
-const app = express();
 const port = process.env.PORT || 3000;
 
 let RedisStore = require("connect-redis")(session);
