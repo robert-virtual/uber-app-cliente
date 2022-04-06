@@ -18,7 +18,7 @@ redisClient
     console.log("redisClient creado con exito");
   })
   .catch((err) => {
-    console.error(err);
+    console.error("redisClient:", err);
   });
 
 if (!__prod__) {
