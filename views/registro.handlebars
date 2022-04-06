@@ -1,4 +1,5 @@
 <form
+  id="form"
   class="center flex flex-col gap-2 md:w-1/5 shadow p-6 rounded-md bg-white dark:bg-[#222]"
   action="/registro"
   method="post"
@@ -6,13 +7,36 @@
   <h1 class="text-3xl mb-4">Registro {{tipo}}</h1>
   <input type="text" name="tipo" value="{{tipo}}" hidden />
 
-  <input placeholder="Nombre" type="text" name="nombre" class="input" />
-  <input placeholder="Correo" type="email" name="correo" class="input" />
-  <input placeholder="Clave" type="password" name="clave" class="input" />
-  <input placeholder="Confirmar Clave" type="password" class="input" />
+  <input
+    required
+    placeholder="Nombre"
+    type="text"
+    name="nombre"
+    class="input"
+  />
+  <input
+    required
+    placeholder="Correo"
+    type="email"
+    name="correo"
+    class="input"
+  />
+  <input
+    required
+    placeholder="Clave"
+    type="password"
+    name="clave"
+    class="input"
+  />
+  <input required placeholder="Confirmar Clave" type="password" class="input" />
   <button class="btn-primary">Registrarse</button>
   <a href="/login?{{tipo}}" class="link-2">Ya tengo una cuenta</a>
 </form>
 {{#if error}}
   <p class="text-red-500 text-center">{{error}}</p>
 {{/if}}
+
+<script>
+  //const form = document.getElementById("form") //form.onsubmit = (e)=>{ // e.
+  //}
+</script>

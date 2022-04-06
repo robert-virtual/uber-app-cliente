@@ -6,8 +6,20 @@
   >
     <h1 class="text-3xl mb-4">Login {{tipo}}</h1>
     <input type="text" name="tipo" value="{{tipo}}" hidden />
-    <input class="input" placeholder="Correo" type="email" name="correo" />
-    <input class="input" placeholder="Clave" type="password" name="clave" />
+    <input
+      required
+      class="input"
+      placeholder="Correo"
+      type="email"
+      name="correo"
+    />
+    <input
+      required
+      class="input"
+      placeholder="Clave"
+      type="password"
+      name="clave"
+    />
     <button class="btn-primary">Entrar</button>
     <a href="/registro?tipo={{tipo}}" class="link-2">Crear cuenta</a>
     <a href="#" class="link-2">Olvide mi contraseña</a>
