@@ -23,7 +23,7 @@ body::-webkit-scrollbar-track {
 
 @layer components {
   .btn-primary {
-    @apply text-center self-stretch bg-blue-500 p-2 text-white rounded-md  hover:scale-105 transition-all active:scale-95;
+    @apply text-center self-stretch bg-[#222] my-2 p-2 text-white rounded-md  hover:scale-105 transition-all active:scale-95;
   }
   .link-black {
     @apply my-2 text-center self-stretch bg-gray-50 p-2 text-black rounded-md  hover:scale-105 transition-all active:scale-95;
