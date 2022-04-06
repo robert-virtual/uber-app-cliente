@@ -38,6 +38,7 @@ app.use("/", require("./routes/inicio"));
 app.use("/mapa", require("./routes/mapa"));
 app.use("/login", require("./routes/login"));
 app.use("/registro", require("./routes/registro"));
+app.use("/ayuda", require("./routes/ayuda"));
 // rurtas
 
 app.listen(port, () => {
