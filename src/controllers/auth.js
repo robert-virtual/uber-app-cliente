@@ -7,9 +7,7 @@ const prisma = new PrismaClient();
 
 exports.login = async (req = request, res = response) => {
   const { tipo } = req.body;
-  if (req.session.userid) {
-    return res.redirect("/mapa");
-  }
+
   const { correo, clave } = req.body;
   try {
     let usuario;
