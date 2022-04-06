@@ -26,7 +26,7 @@ body::-webkit-scrollbar-track {
     @apply text-center self-stretch bg-[#222] my-2 p-2 text-white rounded-md  hover:scale-105 transition-all active:scale-95;
   }
   .link-black {
-    @apply my-2 text-center self-stretch bg-gray-50 p-2 text-black rounded-md  hover:scale-105 transition-all active:scale-95;
+    @apply my-2 text-center self-stretch bg-gray-50 p-2 text-gray-600 rounded-md  hover:scale-105 transition-all active:scale-95;
   }
   .link {
     @apply text-xl hover:text-blue-600 transition-all;

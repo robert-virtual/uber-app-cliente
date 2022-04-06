@@ -506,7 +506,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding: 0.5rem;
   text-align: center;
   --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity));
+  color: rgb(75 85 99 / var(--tw-text-opacity));
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
