@@ -25,6 +25,7 @@ app.use(express.json()); // convertir json en objetos de javacript
 app.use(express.urlencoded({ extended: false })); // convertir info de formulario en objetos de javacript
 
 //configuracion sesion
+app.set("trust proxy", 1); // para estableber el cookie en secure
 app.use(
   session({
     name: cookiename,
