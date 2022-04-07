@@ -4,6 +4,6 @@ const router = require("express").Router();
 
 router.get("/", getViajes);
 router.post("/", postViaje);
-router.post("/updater", updateViaje);
+router.post("/:id", updateViaje);
 
 module.exports = router;
