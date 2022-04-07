@@ -26,6 +26,11 @@
     name="correo"
     class="input"
   />
+  <select name="ciudad">
+    {{#each ciudades}}
+      <option value="{{this.id}}">{{this.nombre}}</option>
+    {{/each}}
+  </select>
   <input
     required
     placeholder="Clave"

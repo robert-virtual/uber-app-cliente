@@ -47,6 +47,14 @@
 
       </div>
       <div class="col">
+        <label for="ciudad">Ciudad</label>
+        <select name="ciudad" id="ciudad">
+          {{#each ciudades}}
+            <option value="{{this}}">{{this}}</option>
+          {{/each}}
+        </select>
+      </div>
+      <div class="col">
         <label for="direccion">Direccion</label>
         <textarea
           required

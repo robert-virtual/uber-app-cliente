@@ -7,17 +7,27 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+
+
 model clientes {
   id            Int      @id @default(autoincrement())
   estado        Boolean  @default(true)
   nombre        String?  @db.VarChar(255)
-  clave         String  @db.VarChar(255)
-  correo        String  @unique @db.VarChar(320)
+  clave         String   @db.VarChar(255)
+  correo        String   @unique @db.VarChar(320)
   direccion     String?  @db.VarChar(255)
+  ciudadId      Int      @default(1)            
+  ciudad        ciudad   @relation(fields: [ciudadId],references: [id])
   imagen        String?  
   telefono      String?  @db.VarChar(8)
   fechaRegistro DateTime @default(now()) @db.Timestamp(0)
   viajes        viajes[]
+}
+model ciudad{
+  id Int @id @default(autoincrement())
+  nombre String
+  conductores conductores[]
+  clientes clientes[]
 }
 
 model conductores {
@@ -26,6 +36,8 @@ model conductores {
   correo             String                 @unique @db.VarChar(255)
   telefono           String?                @db.VarChar(8)
   direccion          String?                @db.VarChar(255)
+  ciudadId           Int                    @default(1)
+  ciudad             ciudad                 @relation(fields: [ciudadId],references: [id])
   clave              String                 @db.VarChar(255)
   licenciaImagen     String?                @db.VarChar(255)
   antecedentesImagen String?                @db.VarChar(255)

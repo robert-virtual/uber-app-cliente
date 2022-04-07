@@ -9,9 +9,11 @@ exports.getregistro = async (req = request, res = response) => {
   if (!tipo) {
     return res.redirect("/");
   }
+  const ciudades = await prisma.ciudad.findMany();
   res.render("registro", {
     titulo: "Registro",
     tipo,
+    ciudades,
   });
 };
 
