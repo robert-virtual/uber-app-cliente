@@ -4,8 +4,25 @@ const { response } = require("express");
 const { request } = require("express");
 const prisma = new PrismaClient();
 
-exports.getayuda = async (req, res) => {
+exports.getayuda = async (req = request, res = response) => {
+  const { userid, conductor } = req.session;
+  let usuario;
+  if (conductor) {
+    usuario = await prisma.conductores.findUnique({
+      where: {
+        id: userid,
+      },
+    });
+  } else {
+    usuario = await prisma.clientes.findUnique({
+      where: {
+        id: userid,
+      },
+    });
+  }
+
   res.render("ayuda", {
+    usuario,
     titulo: "Ayuda",
   });
 };

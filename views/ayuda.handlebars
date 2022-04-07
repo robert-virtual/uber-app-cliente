@@ -5,19 +5,16 @@
 >
   <h1 class="text-3xl mb-4 text-center">Ayuda</h1>
 
-  <input placeholder="Nombre" type="text" name="nombre" class="input" />
   <input
-    placeholder="Celular/Telefono"
-    type="phone"
-    name="telefono"
+    value="{{usuario.nombre}}"
+    hidden
+    placeholder="Nombre"
+    type="text"
+    name="nombre"
     class="input"
   />
-  <input
-    placeholder="Correo Electronico"
-    type="email"
-    name="correo"
-    class="input"
-  />
+  <input type="phone" name="telefono" value="{{usuario.telefono}}" hidden />
+  <input value="{{usuario.correo}}" hidden type="email" name="correo" />
   <label for="mensaje">Mensaje</label>
   <textarea
     class="input"
