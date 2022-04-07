@@ -16,9 +16,9 @@ exports.postPerfil = async (req = request, res = response) => {
           { Bucket: bucket, Key: req.session.perfil },
           (err, data) => {
             if (err) {
-              console.log(err);
+              console.log("aws-deleteObject-error:", err);
             }
-            console.log(data);
+            console.log("aws-deleteObject:", data);
           }
         );
       }
