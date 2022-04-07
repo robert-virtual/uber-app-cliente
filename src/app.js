@@ -56,7 +56,7 @@ app.use(async (req, _, next) => {
     app.locals.username = username;
     app.locals.cliente = cliente;
     app.locals.conductor = conductor;
-    app.locals.perfil = perfil;
+    app.locals.perfil = perfil || "/img/person.svg";
 
     return next();
   }
