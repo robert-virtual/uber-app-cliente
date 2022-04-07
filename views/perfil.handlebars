@@ -5,13 +5,9 @@
         <label for="img" class="w-40">
           <span>Selecionar Imagen</span>
           {{#if usuario.imagen}}
-            <img
-              src="{{usuario.imagen}}"
-              class="w-40 rounded-full"
-              alt="perfil"
-            />
+            <img src="{{usuario.imagen}}" class="w-40" alt="perfil" />
           {{else}}
-            <img src="/img/person.svg" alt="" />
+            <img id="img-perfil" src="/img/person.svg" alt="" />
           {{/if}}
 
         </label>
@@ -103,3 +99,5 @@
     <p class="text-red-500 text-center">{{error}}</p>
   {{/if}}
 </div>
+
+<script src="/perfil.js"></script>
