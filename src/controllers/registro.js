@@ -33,7 +33,10 @@ exports.postregistro = async (req = request, res = response) => {
     req.session.userid = usuario.id;
     req.session.conductor = tipo == "Conductores";
     req.session.cliente = tipo != "Conductores";
-
+    if (tipo == "Conductores") {
+      res.redirect("/viajes");
+      return;
+    }
     res.redirect("/mapa");
   } catch (error) {
     let correoError;
