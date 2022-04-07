@@ -31,8 +31,10 @@ model conductores {
   antecedentesImagen String?                @db.VarChar(255)
   fechaRegistro      DateTime               @default(now()) @db.Timestamp(0)
   imagen             String?                @db.VarChar(255)
+  imagenCarro        String?                @db.VarChar(255)
+  carro              String?                @db.VarChar(255)
   tipoCarro          conductores_tipoCarro? @default(normal)
-  estado             Boolean               @default(true)
+  estado             Boolean                @default(true)
   viajes             viajes[]
 }
 

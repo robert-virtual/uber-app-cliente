@@ -80,6 +80,7 @@ app.use("/registro", require("./routes/registro"));
 app.use("/perfil", require("./routes/perfil"));
 app.use("/conductores", require("./routes/conductores"));
 app.use("/viajes", require("./routes/viajes"));
+app.use("/coches", require("./routes/coches"));
 // rutas
 
 app.listen(port, () => {

@@ -7,8 +7,11 @@ exports.postPerfil = async (req = request, res = response) => {
   console.log("postPerfil: body:", req.body);
   try {
     if (req.file) {
+      console.log("file:", req.file);
       req.body.imagen = req.file.filename;
+      // req.body.imagenCarro = req.file.filename;
     }
+
     let usuario;
     if (tipoUser == "Conductores") {
       usuario = await prisma.conductores.update({

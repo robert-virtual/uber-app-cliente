@@ -1,0 +1,16 @@
+<div class="col">
+  <label for="car-img" class="w-40">
+    <span>Coche</span>
+    {{#if usuario.carImagen}}
+      <img
+        src="/{{usuario.imagenCarro}}"
+        class="w-40 rounded-full"
+        alt="perfil"
+      />
+    {{else}}
+      <img src="/img/car.svg" alt="" />
+    {{/if}}
+
+  </label>
+  <input type="file" id="car-img" name="img" hidden />
+</div>
