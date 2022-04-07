@@ -5,7 +5,12 @@
         <label for="img" class="w-40">
           <span>Selecionar Imagen</span>
           {{#if usuario.imagen}}
-            <img src="{{usuario.imagen}}" class="w-40" alt="perfil" />
+            <img
+              id="img-perfil"
+              src="{{usuario.imagen}}"
+              class="w-40"
+              alt="perfil"
+            />
           {{else}}
             <img id="img-perfil" src="/img/person.svg" alt="" />
           {{/if}}
