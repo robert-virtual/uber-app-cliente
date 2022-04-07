@@ -57,7 +57,7 @@ app.use(async (req, _, next) => {
     app.locals.cliente = cliente;
     app.locals.conductor = conductor;
     app.locals.perfil = perfil || "/img/person.svg";
-
+    console.log("session:", req.session);
     return next();
   }
   app.locals.username = undefined;

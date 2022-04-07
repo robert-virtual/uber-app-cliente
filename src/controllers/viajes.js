@@ -58,7 +58,7 @@ exports.getViajes = async (req = request, res = response) => {
   });
   console.log("viajes:", viajes);
   res.render("viajes", {
-    viajes,
+    viajes: viajes.length && viajes,
   });
 };
 exports.postViaje = async (req = request, res = response) => {
