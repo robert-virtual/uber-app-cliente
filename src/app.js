@@ -73,7 +73,9 @@ app.use("/", require("./routes/inicio"));
 app.use("/", require("./routes/auth"));
 app.use("/mapa", require("./routes/mapa"));
 app.use("/registro", require("./routes/registro"));
-// rutas
+
+app.use("/ayuda", require("./routes/ayuda"));
+
 
 app.listen(port, () => {
   console.log("aplicacion ejecutandose en el puerto: ", port);
