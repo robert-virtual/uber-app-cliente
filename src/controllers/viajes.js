@@ -3,12 +3,24 @@ const { request } = require("express");
 const { response } = require("express");
 const prisma = new PrismaClient();
 
+exports.updateViaje = async (req = request, res = response) => {
+  await prisma.viajes.update({
+    data: req.body,
+    where: {
+      id: req.params.id,
+    },
+  });
+  res.redirect("/viajes");
+};
+
 exports.getViajes = async (req = request, res = response) => {
   if (!req.session.userid) {
     return res.redirect("/");
   }
   const viajes = await prisma.viajes.findMany({
     select: {
+      id: true,
+
       clienteId: true,
       conductorId: true,
       destino: true,
@@ -39,7 +51,6 @@ exports.getViajes = async (req = request, res = response) => {
   });
   res.render("viajes", { viajes });
 };
-
 exports.postViaje = async (req = request, res = response) => {
   const viaje = await prisma.viajes.create({
     data: {

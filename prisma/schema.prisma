@@ -73,7 +73,9 @@ model viajes {
   clientes             clientes          @relation(fields: [clienteId], references: [id])
   conductores          conductores       @relation(fields: [conductorId], references: [id])
   quejas               quejas[]
-
+  iniciado              Boolean          @default(false) 
+  cancelado             Boolean          @default(false) 
+  finalizado            Boolean          @default(false) 
   @@index([conductorId], map: "viajes_ibfk_1")
   @@index([clienteId], map: "viajes_ibfk_2")
 }
