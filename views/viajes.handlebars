@@ -29,9 +29,11 @@
           <p>Destino: {{this.destino}}</p>
         </div>
         <div class="flex flex-row gap-2">
-          {{#if this.iniciado}}
+          {{#if this.finalizado}}
+            <p>Terminado</p>
+          {{else if iniciado}}
             <form action="/viajes/{{this.id}}" method="post">
-              <input type="checkbox" name="terminado" checked hidden />
+              <input type="checkbox" name="finalizado" checked hidden />
               <button class="btn-primary">Terminar</button>
             </form>
           {{else}}
@@ -41,10 +43,12 @@
             </form>
           {{/if}}
 
-          <form action="/viajes/{{this.id}}" method="post">
-            <input type="checkbox" name="cancelado" checked hidden />
-            <button class="btn-primary bg-red-400">Cancelar</button>
-          </form>
+          {{#unless this.finalizado}}
+            <form action="/viajes/{{this.id}}" method="post">
+              <input type="checkbox" name="cancelado" checked hidden />
+              <button class="btn-primary bg-red-400">Cancelar</button>
+            </form>
+          {{/unless}}
 
         </div>
       </div>
