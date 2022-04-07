@@ -12,6 +12,7 @@ exports.getConductores = async (req = request, res = response) => {
       tipoCarro: true,
       correo: true,
       telefono: true,
+      carro: true,
     },
   });
   res.json(conductores);

@@ -220,7 +220,7 @@ async function mostrarConductores(destino) {
   //text, place_name_es, center
   data = data.map((c) => ({
     text: c.nombre,
-    place_name_es: c.telefono || c.correo,
+    place_name_es: c.carro || c.correo,
     onclick: () => {
       console.log(c.id, destino);
       fetch("/viajes", {
