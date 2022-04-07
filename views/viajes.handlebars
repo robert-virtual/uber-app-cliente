@@ -2,16 +2,16 @@
 
   {{#each viajes}}
     <div
-      class="card shadow-md bg-gray-600 w-11/12 flex items-center justify-between"
+      class="card shadow-md dark:bg-gray-600 w-11/12 flex items-center justify-between"
     >
 
       <div>
 
         <div class="flex gap-2">
-          <p>cliente: {{this.clientes.nombre}}</p>
+          <p>Cliente: {{this.clientes.nombre}}</p>
           <img src="{{this.clientes.imagen}}" class="w-10" alt="" />
           <span>|</span>
-          <p>conductor: {{this.conductores.nombre}}</p>
+          <p>Conductor: {{this.conductores.nombre}}</p>
           {{#if this.conductores.imagen}}
             <img src="{{this.conductores.imagen}}" class="w-10" alt="" />
           {{else}}

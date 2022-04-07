@@ -83,7 +83,10 @@
       {{#if conductor}}
         <div class="col">
           <label>Coche</label>
-          <a href="/coches" class="btn-primary bg-white text-black self-start">
+          <a
+            href="/coches"
+            class="btn-primary dark:bg-white dark:text-black self-start"
+          >
             {{#if usuario.imagenCarro}}
               Editar Coche
             {{else}}
@@ -97,7 +100,7 @@
     </div>
 
     <button
-      class="btn-primary bg-white text-black self-start my-4"
+      class="btn-primary dark:bg-white dark:text-black self-start my-4"
     >Actualizar</button>
   </form>
   {{#if error}}

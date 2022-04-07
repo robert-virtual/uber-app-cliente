@@ -772,6 +772,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 20rem;
 }
 
+.w-1\/2 {
+  width: 50%;
+}
+
+.w-\[50vw\] {
+  width: 50vw;
+}
+
 @-webkit-keyframes pulse {
   50% {
     opacity: .5;
@@ -961,6 +969,11 @@ body::-webkit-scrollbar-track {
   .dark\:bg-black {
     --tw-bg-opacity: 1;
     background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+  }
+
+  .dark\:bg-gray-600 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(75 85 99 / var(--tw-bg-opacity));
   }
 
   .dark\:text-black {
