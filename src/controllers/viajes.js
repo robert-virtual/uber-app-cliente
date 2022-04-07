@@ -50,7 +50,9 @@ exports.getViajes = async (req = request, res = response) => {
       clienteId: req.session.userid,
     },
   });
-  res.render("viajes", { viajes });
+  res.render("viajes", {
+    viajes,
+  });
 };
 exports.postViaje = async (req = request, res = response) => {
   const viaje = await prisma.viajes.create({

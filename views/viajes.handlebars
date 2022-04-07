@@ -29,24 +29,22 @@
           <p>Destino: {{this.destino}}</p>
         </div>
         <div class="flex flex-row gap-2">
-          {{#if cliente}}
-            {{#if this.iniciado}}
-              <form action="/viajes/{{this.id}}" method="post">
-                <input type="checkbox" name="terminado" checked hidden />
-                <button class="btn-primary">Terminar</button>
-              </form>
-            {{else}}
-              <form action="/viajes/{{this.id}}" method="post">
-                <input type="checkbox" name="iniciado" checked hidden />
-                <button class="btn-primary">Iniciar</button>
-              </form>
-            {{/if}}
-
+          {{#if this.iniciado}}
             <form action="/viajes/{{this.id}}" method="post">
-              <input type="checkbox" name="cancelado" checked hidden />
-              <button class="btn-primary bg-red-400">Cancelar</button>
+              <input type="checkbox" name="terminado" checked hidden />
+              <button class="btn-primary">Terminar</button>
+            </form>
+          {{else}}
+            <form action="/viajes/{{this.id}}" method="post">
+              <input type="checkbox" name="iniciado" checked hidden />
+              <button class="btn-primary">Iniciar</button>
             </form>
           {{/if}}
+
+          <form action="/viajes/{{this.id}}" method="post">
+            <input type="checkbox" name="cancelado" checked hidden />
+            <button class="btn-primary bg-red-400">Cancelar</button>
+          </form>
 
         </div>
       </div>
