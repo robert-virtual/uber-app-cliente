@@ -17,14 +17,14 @@ exports.getCoches = async (req = request, res = response) => {
 };
 exports.postCoches = async (req = request, res = response) => {
   if (req.file) {
-    console.log("file:", req.file);
     req.body.imagenCarro = req.file.filename;
     // req.body.imagenCarro = req.file.filename;
   }
-  prisma.conductores.update({
+  const data = await prisma.conductores.update({
     data: req.body,
     where: {
       id: req.session.userid,
     },
   });
+  res.render("coches", data);
 };

@@ -743,6 +743,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 20rem;
 }
 
+.w-96 {
+  width: 24rem;
+}
+
 @-webkit-keyframes pulse {
   50% {
     opacity: .5;
@@ -772,8 +776,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   place-items: center;
 }
 
+.items-start {
+  align-items: flex-start;
+}
+
 .items-center {
   align-items: center;
+}
+
+.justify-start {
+  justify-content: flex-start;
 }
 
 .justify-center {
@@ -786,6 +798,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .gap-2 {
   gap: 0.5rem;
+}
+
+.gap-4 {
+  gap: 1rem;
 }
 
 .self-start {

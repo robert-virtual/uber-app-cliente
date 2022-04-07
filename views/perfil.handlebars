@@ -1,6 +1,6 @@
 <form
   id="form"
-  class="custom-grid gap-2"
+  class="custom-grid gap-4"
   action="/perfil"
   method="post"
   enctype="multipart/form-data"
@@ -8,6 +8,7 @@
   <div class="col">
 
     <label for="img" class="w-40">
+      <span>Selecionar Imagen</span>
       {{#if usuario.imagen}}
         <img src="/{{usuario.imagen}}" class="w-40 rounded-full" alt="perfil" />
       {{else}}
@@ -75,10 +76,13 @@
   {{#if conductor}}
     <div class="col">
       <label>Coche</label>
-      <a
-        href="/coches"
-        class="btn-primary bg-white text-black self-start"
-      >Agregar Coche</a>
+      <a href="/coches" class="btn-primary bg-white text-black self-start">
+        {{#if usuario.imagenCarro}}
+          Editar Coche
+        {{else}}
+          Agregar Coche
+        {{/if}}
+      </a>
 
     </div>
 
