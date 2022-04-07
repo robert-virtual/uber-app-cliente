@@ -29,8 +29,7 @@ exports.postPerfil = async (req = request, res = response) => {
         },
       });
     }
-    console.log("postPerfil: usuario:");
-    console.log(usuario);
+    res.app.locals.perfil = usuario.imagen;
     res.redirect("/perfil");
   } catch (error) {
     console.log(error);
