@@ -5,10 +5,8 @@ const prisma = new PrismaClient();
 
 exports.postPerfil = async (req = request, res = response) => {
   let { conductor } = req.session;
-  console.log("postPerfil: body:", req.body);
   try {
     if (req.file) {
-      console.log("file:", req.file);
       req.body.imagen = req.file.location;
       // req.body.imagenCarro = req.file.filename;
       if (req.session.perfil) {
@@ -43,7 +41,6 @@ exports.postPerfil = async (req = request, res = response) => {
     req.session.perfil = usuario.imagen;
     res.redirect("/perfil");
   } catch (error) {
-    console.log(error);
     res.render("perfil", {
       error: "Lo sentimo ha ocurrido un error intente mas tarde",
     });
@@ -80,7 +77,6 @@ exports.getPerfil = async (req = request, res = response) => {
       },
     },
   });
-  console.log(usuario);
   res.render("perfil", {
     usuario,
     conductor: req.session.conductor,
