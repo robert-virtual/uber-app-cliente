@@ -41,12 +41,12 @@ exports.getViajes = async (req = request, res = response) => {
 };
 
 exports.postViaje = async (req = request, res = response) => {
-  await prisma.viajes.create({
+  const viaje = await prisma.viajes.create({
     data: {
       clienteId: Number(req.session.userid),
       conductorId: Number(req.body.conductor),
       destino: req.body.destino,
     },
   });
-  res.redirect("/viajes");
+  res.json(viaje);
 };

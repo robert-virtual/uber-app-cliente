@@ -233,6 +233,8 @@ async function mostrarConductores(destino) {
           conductor: c.id,
           destino,
         }),
+      }).then(() => {
+        location.href = "/viajes";
       });
     },
   }));
