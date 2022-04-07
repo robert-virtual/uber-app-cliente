@@ -608,10 +608,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: 1rem;
 }
 
-.mb-1 {
-  margin-bottom: 0.25rem;
-}
-
 .flex {
   display: flex;
 }
@@ -699,7 +695,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem;
-  text-align: center;
 }
 
 .text-black {
@@ -737,11 +732,6 @@ body::-webkit-scrollbar-thumb {
 body::-webkit-scrollbar-track {
   width: 0.5rem;
   background-color: #e9e9e9;
-}
-
-.hover\:text-blue-600:hover {
-  --tw-text-opacity: 1;
-  color: rgb(37 99 235 / var(--tw-text-opacity));
 }
 
 @media (prefers-color-scheme: dark) {
