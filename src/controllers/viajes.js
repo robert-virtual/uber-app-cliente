@@ -73,6 +73,7 @@ exports.postViaje = async (req = request, res = response) => {
       conductorId: Number(req.body.conductor),
       destino: req.body.destino,
       monto: Number(req.body.monto),
+      duracion: String(req.body.minutes),
     },
   });
   res.json(viaje);

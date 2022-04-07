@@ -138,7 +138,7 @@ function createResult({ text, place_name_es, center, onclick }) {
       console.log(center);
       const res = await trazarRuta({ lat: center[1], lng: center[0] });
       crearMarcador({ lat: center[1], lng: center[0], ...res });
-      mostrarConductores(place_name_es);
+      mostrarConductores(place_name_es, res);
     };
   }
   if (onclick) {
@@ -213,7 +213,7 @@ async function trazarRuta({ lat, lng }) {
   };
 }
 
-async function mostrarConductores(destino) {
+async function mostrarConductores(destino, { minutes }) {
   searchrResults.innerHTML = "";
   const res = await fetch("/conductores");
   let data = await res.json();
@@ -239,7 +239,8 @@ async function mostrarConductores(destino) {
         body: JSON.stringify({
           conductor: c.id,
           destino,
-          monto: Math.floor(Math.random() * 300) + 300,
+          monto: (minutes / 60) * 150,
+          minutes,
         }),
       }).then(() => {
         location.href = "/viajes";
