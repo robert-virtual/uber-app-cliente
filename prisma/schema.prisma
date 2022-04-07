@@ -79,7 +79,7 @@ model viajes {
   fecha                DateTime?          @default(now()) @db.Timestamp(0)
   duracion             String?            @db.VarChar(255)
   conductorId          Int
-  monto                Float?              
+  monto                Float?             
   porcentajeDeducccion Float?              
   metodoPago           viajes_metodoPago? 
   clientes             clientes          @relation(fields: [clienteId], references: [id])

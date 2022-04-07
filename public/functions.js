@@ -239,6 +239,7 @@ async function mostrarConductores(destino) {
         body: JSON.stringify({
           conductor: c.id,
           destino,
+          monto: Math.floor(Math.random() * 300) + 300,
         }),
       }).then(() => {
         location.href = "/viajes";

@@ -63,7 +63,7 @@ exports.getViajes = async (req = request, res = response) => {
   });
   console.log("viajes:", viajes);
   res.render("viajes", {
-    viajes: viajes.length && viajes,
+    viajes: viajes.length && viajes.reverse(),
   });
 };
 exports.postViaje = async (req = request, res = response) => {
@@ -72,6 +72,7 @@ exports.postViaje = async (req = request, res = response) => {
       clienteId: Number(req.session.userid),
       conductorId: Number(req.body.conductor),
       destino: req.body.destino,
+      monto: Number(req.body.monto),
     },
   });
   res.json(viaje);
