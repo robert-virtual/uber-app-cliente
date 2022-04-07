@@ -14,7 +14,7 @@ const port = process.env.PORT || 3000;
 
 let RedisStore = require("connect-redis")(session);
 const Redis = require("ioredis");
-let redisClient = new Redis(process.env.REDIS_URL_LOCAL);
+let redisClient = new Redis(process.env.REDIS_URL);
 
 app.set("trust proxy", 1); // para estableber el cookie en secure
 // configuracion handlebars
