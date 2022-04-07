@@ -1,5 +1,6 @@
 const { response, request } = require("express");
 const { PrismaClient } = require("@prisma/client");
+const { bucket, s3 } = require("../config/s3Upload");
 const prisma = new PrismaClient();
 
 exports.postPerfil = async (req = request, res = response) => {
@@ -8,10 +9,20 @@ exports.postPerfil = async (req = request, res = response) => {
   try {
     if (req.file) {
       console.log("file:", req.file);
-      req.body.imagen = req.file.filename;
+      req.body.imagen = req.file.location;
       // req.body.imagenCarro = req.file.filename;
+      if (req.session.perfil) {
+        s3.deleteObject(
+          { Bucket: bucket, Key: req.session.perfil },
+          (err, data) => {
+            if (err) {
+              console.log(err);
+            }
+            console.log(data);
+          }
+        );
+      }
     }
-
     let usuario;
     req.body.ciudadId = Number(req.body.ciudadId);
     if (conductor) {

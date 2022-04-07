@@ -38,6 +38,7 @@ exports.postregistro = async (req = request, res = response) => {
     req.session.cliente = tipo != "Conductores";
     req.session.username = usuario.nombre || usuario.correo;
     req.session.perfil = usuario.imagen;
+    req.session.imagenCarro = usuario.imagenCarro;
     if (tipo == "Conductores") {
       res.redirect("/viajes");
       return;
