@@ -7,7 +7,7 @@ exports.getConductores = async (req = request, res = response) => {
   try {
     const { ciudadId } = await prisma.clientes.findUnique({
       select: {
-        ciudadId,
+        ciudadId: true,
       },
       where: {
         id: req.session.userid,
@@ -30,6 +30,6 @@ exports.getConductores = async (req = request, res = response) => {
     });
     res.json(conductores);
   } catch (error) {
-    res.json(conductores);
+    res.json({ error: error.message });
   }
 };

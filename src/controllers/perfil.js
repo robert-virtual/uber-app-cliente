@@ -13,6 +13,7 @@ exports.postPerfil = async (req = request, res = response) => {
     }
 
     let usuario;
+    req.body.ciudadId = Number(req.body.ciudadId);
     if (tipoUser == "Conductores") {
       usuario = await prisma.conductores.update({
         data: req.body,
@@ -50,16 +51,30 @@ exports.getPerfil = async (req = request, res = response) => {
       where: {
         id: req.session.userid,
       },
+      include: {
+        ciudad: true,
+      },
     });
   } else {
     usuario = await prisma.clientes.findUnique({
+      include: {
+        ciudad: true,
+      },
       where: {
         id: req.session.userid,
       },
     });
   }
+  const ciudades = await prisma.ciudad.findMany({
+    where: {
+      id: {
+        not: usuario.ciudadId,
+      },
+    },
+  });
   res.render("perfil", {
     usuario,
     conductor: req.session.conductor,
+    ciudades,
   });
 };

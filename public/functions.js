@@ -119,7 +119,7 @@ function crearMarcador({ lat, lng, kms, minutes }) {
 
 /**
  *
- * @param {{text:string,place_name_es:string,center?:[number,number],onclick:(e:any)=>void}} param0
+ * @param {{text:string,place_name_es:string,center?:[number,number],onclick?:(e:any)=>void}} param0
  */
 function createResult({ text, place_name_es, center, onclick }) {
   const t = d.createElement("template");
@@ -217,12 +217,19 @@ async function mostrarConductores(destino) {
   searchrResults.innerHTML = "";
   const res = await fetch("/conductores");
   let data = await res.json();
+  if (!data.length) {
+    createResult({
+      text: "Sin resultados ",
+      place_name_es: "No se encontraron conductores en su area",
+    });
+    return;
+  }
+  console.log(data);
   //text, place_name_es, center
   data = data.map((c) => ({
     text: c.nombre,
     place_name_es: c.carro || c.correo,
     onclick: () => {
-      console.log(c.id, destino);
       fetch("/viajes", {
         headers: {
           "Content-Type": "application/json",

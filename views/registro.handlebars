@@ -26,11 +26,13 @@
     name="correo"
     class="input"
   />
-  <select name="ciudad">
+  <label for="ciudadId">Ciudad:</label>
+  <select name="ciudadId" id="ciudadId">
     {{#each ciudades}}
       <option value="{{this.id}}">{{this.nombre}}</option>
     {{/each}}
   </select>
+
   <input
     required
     placeholder="Clave"

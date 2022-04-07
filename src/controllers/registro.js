@@ -23,6 +23,7 @@ exports.postregistro = async (req = request, res = response) => {
   try {
     req.body.clave = await hash(req.body.clave);
     let usuario;
+    req.body.ciudadId = Number(req.body.ciudadId);
     if (tipo == "Conductores") {
       usuario = await prisma.conductores.create({
         data: req.body,

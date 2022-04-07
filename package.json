@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "src/app.js",
+  "prisma": {
+    "seed": "node prisma/seed.js"
+  },
   "scripts": {
     "tailwind": "npx tailwindcss -i ./src/index.css -o ./public/output.css --watch",
     "dev": "nodemon .",
