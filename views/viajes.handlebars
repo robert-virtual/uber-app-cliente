@@ -7,14 +7,14 @@
       >
 
         <div>
-          {{#if conductor}}
-            <p>cliente:{{this.clientes.nombre}}</p>
-          {{/if}}
 
           <div class="flex gap-2">
+            {{#if conductor}}
+              <p>cliente:{{this.clientes.nombre}}</p>
+            {{/if}}
             <span>conductor:</span>
             {{#if this.conductores.imagen}}
-              <img src="/{{this.conductores.imagen}}" class="w-10" alt="" />
+              <img src="{{this.conductores.imagen}}" class="w-10" alt="" />
             {{else}}
               <img src="/img/person.svg" class="w-10" alt="" />
             {{/if}}
