@@ -30,6 +30,7 @@ exports.getViajes = async (req = request, res = response) => {
         select: {
           direccion: true,
           nombre: true,
+          carro: true,
           correo: true,
           imagen: true,
           tipoCarro: true,

@@ -45,6 +45,8 @@ exports.login = async (req = request, res = response) => {
     req.session.userid = usuario.id;
     req.session.cliente = tipo != "Conductores";
     req.session.conductor = tipo == "Conductores";
+    req.session.username = usuario.nombre || usuario.correo;
+    req.session.perfil = usuario.imagen;
     if (tipo == "Conductores") {
       res.redirect("/viajes");
       return;

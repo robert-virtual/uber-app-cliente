@@ -51,26 +51,17 @@ app.use(
 // rutas
 app.use(async (req, _, next) => {
   if (req.session.userid) {
-    let { conductor } = req.session;
-    let usuario;
-    if (conductor) {
-      usuario = await prisma.conductores.findUnique({
-        where: {
-          id: req.session.userid,
-        },
-      });
-    } else {
-      usuario = await prisma.clientes.findUnique({
-        where: {
-          id: req.session.userid,
-        },
-      });
-    }
-    app.locals.username = usuario.nombre;
-    app.locals.cliente = !conductor;
+    let { conductor, cliente, username, perfil } = req.session;
+
+    app.locals.username = username;
+    app.locals.cliente = cliente;
     app.locals.conductor = conductor;
-    next();
-    return;
+    app.locals.perfil = perfil;
+    console.log("middleware locals");
+    console.log("cliente", !conductor);
+    console.log("conductor", conductor);
+
+    return next();
   }
   app.locals.username = undefined;
   next();
