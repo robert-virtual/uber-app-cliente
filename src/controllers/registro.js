@@ -9,9 +9,11 @@ exports.getregistro = async (req = request, res = response) => {
   if (!tipo) {
     return res.redirect("/");
   }
+  const ciudades = await prisma.ciudad.findMany();
   res.render("registro", {
     titulo: "Registro",
     tipo,
+    ciudades,
   });
 };
 
@@ -21,6 +23,7 @@ exports.postregistro = async (req = request, res = response) => {
   try {
     req.body.clave = await hash(req.body.clave);
     let usuario;
+    req.body.ciudadId = Number(req.body.ciudadId);
     if (tipo == "Conductores") {
       usuario = await prisma.conductores.create({
         data: req.body,
@@ -31,8 +34,15 @@ exports.postregistro = async (req = request, res = response) => {
       });
     }
     req.session.userid = usuario.id;
-    req.session.tipoUser = tipo;
-
+    req.session.conductor = tipo == "Conductores";
+    req.session.cliente = tipo != "Conductores";
+    req.session.username = usuario.nombre || usuario.correo;
+    req.session.perfil = usuario.imagen;
+    req.session.imagenCarro = usuario.imagenCarro;
+    if (tipo == "Conductores") {
+      res.redirect("/viajes");
+      return;
+    }
     res.redirect("/mapa");
   } catch (error) {
     let correoError;

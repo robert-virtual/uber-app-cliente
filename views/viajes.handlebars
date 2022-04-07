@@ -1,0 +1,61 @@
+<div>
+
+  {{#if viajes}}
+    {{#each viajes}}
+      <div
+        class="card shadow-md bg-gray-600 w-11/12 flex items-center justify-between"
+      >
+
+        <div>
+          {{#if conductor}}
+            <p>cliente:{{this.clientes.nombre}}</p>
+          {{/if}}
+
+          <div class="flex gap-2">
+            <span>conductor:</span>
+            {{#if this.conductores.imagen}}
+              <img src="/{{this.conductores.imagen}}" class="w-10" alt="" />
+            {{else}}
+              <img src="/img/person.svg" class="w-10" alt="" />
+            {{/if}}
+            <span>|</span>
+            <p>{{this.conductores.nombre}}</p>
+            <span>|</span>
+            <p>{{this.conductores.carro}}</p>
+            <span>|</span>
+            <p>{{this.conductores.telefono}}</p>
+
+          </div>
+          <p>Destino: {{this.destino}}</p>
+        </div>
+        <div class="flex flex-row gap-2">
+          {{#if this.finalizado}}
+            <p>Terminado</p>
+          {{else if iniciado}}
+            <form action="/viajes/{{this.id}}" method="post">
+              <input type="checkbox" name="finalizado" checked hidden />
+              <button class="btn-primary">Terminar</button>
+            </form>
+          {{else}}
+            <form action="/viajes/{{this.id}}" method="post">
+              <input type="checkbox" name="iniciado" checked hidden />
+              <button class="btn-primary">Iniciar</button>
+            </form>
+          {{/if}}
+
+          {{#unless this.finalizado}}
+            <form action="/viajes/{{this.id}}" method="post">
+              <input type="checkbox" name="cancelado" checked hidden />
+              <button class="btn-primary bg-red-400">Cancelar</button>
+            </form>
+          {{/unless}}
+
+        </div>
+      </div>
+    {{/each}}
+
+  {{else}}
+    <p class="center">Aun no hay viajes</p>
+  {{/if}}
+
+</div>

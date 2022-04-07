@@ -1,0 +1,38 @@
+<form
+  action="/coches"
+  class="col gap-2 p-4 items-start"
+  method="post"
+  enctype="multipart/form-data"
+>
+
+  <div class="col">
+    <label for="car-img" class="w-40">
+      Descripcion Coche
+    </label>
+    <input
+      value="{{carro}}"
+      type="text"
+      class="input"
+      name="carro"
+      placeholder="Tesla model 3"
+    />
+  </div>
+  <div class="col">
+    <label for="car-img" class="w-40">
+      <span>Seleccionar imagen</span>
+      {{#if imagenCarro}}
+        <img src="{{imagenCarro}}" class="w-96" alt="perfil" />
+      {{else}}
+        <img src="/img/car.svg" alt="" />
+      {{/if}}
+
+    </label>
+    <input type="file" id="car-img" name="img" hidden />
+  </div>
+  <button class="btn-primary bg-white text-black self-start">Guardar</button>
+
+</form>
+
+{{#if error}}
+  <p class="text-red-500 text-center">{{error}}</p>
+{{/if}}

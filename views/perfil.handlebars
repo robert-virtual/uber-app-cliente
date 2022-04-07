@@ -1,0 +1,105 @@
+<div class="m-4">
+  <form id="form" action="/perfil" method="post" enctype="multipart/form-data">
+    <div class="custom-grid gap-4">
+      <div class="col">
+        <label for="img" class="w-40">
+          <span>Selecionar Imagen</span>
+          {{#if usuario.imagen}}
+            <img
+              src="{{usuario.imagen}}"
+              class="w-40 rounded-full"
+              alt="perfil"
+            />
+          {{else}}
+            <img src="/img/person.svg" alt="" />
+          {{/if}}
+
+        </label>
+        <input type="file" id="img" name="img" hidden />
+      </div>
+      <div class="col">
+        <label for="nombre">Nombre</label>
+        <input
+          required
+          placeholder="Nombre"
+          type="text"
+          name="nombre"
+          value="{{usuario.nombre}}"
+          class="input"
+        />
+
+      </div>
+      <div class="col">
+        <label for="correo">Correo</label>
+        <input
+          required
+          placeholder="Correo"
+          type="email"
+          name="correo"
+          value="{{usuario.correo}}"
+          class="input"
+        />
+
+      </div>
+      <div class="col">
+        <label for="ciudadId">Ciudad:</label>
+        <select class="input" name="ciudadId" id="ciudadId">
+          <option
+            selected
+            value="{{usuario.ciudadId}}"
+          >{{usuario.ciudad.nombre}}</option>
+          {{#each ciudades}}
+            <option value="{{this.id}}">{{this.nombre}}</option>
+          {{/each}}
+        </select>
+      </div>
+      <div class="col">
+        <label for="direccion">Direccion</label>
+        <textarea
+          required
+          placeholder="Direccion"
+          name="direccion"
+          cols="30"
+          rows="10"
+          class="input"
+        >{{usuario.direccion}}</textarea>
+
+      </div>
+      <div class="col">
+        <label for="telefono">Telefono</label>
+        <input
+          required
+          placeholder="Telefono"
+          class="input"
+          minlength="8"
+          maxlength="8"
+          type="tel"
+          value="{{usuario.telefono}}"
+          name="telefono"
+        />
+
+      </div>
+      {{#if conductor}}
+        <div class="col">
+          <label>Coche</label>
+          <a href="/coches" class="btn-primary bg-white text-black self-start">
+            {{#if usuario.imagenCarro}}
+              Editar Coche
+            {{else}}
+              Agregar Coche
+            {{/if}}
+          </a>
+
+        </div>
+
+      {{/if}}
+    </div>
+
+    <button
+      class="btn-primary bg-white text-black self-start my-4"
+    >Actualizar</button>
+  </form>
+  {{#if error}}
+    <p class="text-red-500 text-center">{{error}}</p>
+  {{/if}}
+</div>

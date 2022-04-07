@@ -6,7 +6,7 @@ const { cookiename } = require("../constantes");
 const prisma = new PrismaClient();
 
 exports.login = async (req = request, res = response) => {
-  const { tipo } = req.body;
+  const { tipo } = req.body; // conductor o cliente
 
   const { correo, clave } = req.body;
   try {
@@ -43,8 +43,16 @@ exports.login = async (req = request, res = response) => {
       return;
     }
     req.session.userid = usuario.id;
-    req.session.tipoUser = tipo;
+    req.session.cliente = tipo != "Conductores";
+    req.session.conductor = tipo == "Conductores";
+    req.session.username = usuario.nombre || usuario.correo;
+    req.session.perfil = usuario.imagen;
+    req.session.imagenCarro = usuario.imagenCarro;
 
+    if (tipo == "Conductores") {
+      res.redirect("/viajes");
+      return;
+    }
     res.redirect("/mapa");
   } catch (error) {
     res.render("login", {

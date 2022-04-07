@@ -7,30 +7,46 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+
+
 model clientes {
   id            Int      @id @default(autoincrement())
   estado        Boolean  @default(true)
   nombre        String?  @db.VarChar(255)
-  clave         String  @db.VarChar(255)
-  correo        String  @unique @db.VarChar(320)
+  clave         String   @db.VarChar(255)
+  correo        String   @unique @db.VarChar(320)
   direccion     String?  @db.VarChar(255)
+  ciudadId      Int      @default(1)            
+  ciudad        ciudad   @relation(fields: [ciudadId],references: [id])
+  imagen        String?  
   telefono      String?  @db.VarChar(8)
   fechaRegistro DateTime @default(now()) @db.Timestamp(0)
   viajes        viajes[]
+}
+model ciudad{
+  id Int @id @default(autoincrement())
+  nombre String @unique
+  conductores conductores[]
+  clientes clientes[]
 }
 
 model conductores {
   id                 Int                    @id @default(autoincrement())
   nombre             String                 @db.VarChar(255)
   correo             String                 @unique @db.VarChar(255)
-  telefono           String                 @db.VarChar(8)
-  clave             String                  @db.VarChar(255)
+  telefono           String?                @db.VarChar(8)
+  direccion          String?                @db.VarChar(255)
+  ciudadId           Int                    @default(1)
+  ciudad             ciudad                 @relation(fields: [ciudadId],references: [id])
+  clave              String                 @db.VarChar(255)
   licenciaImagen     String?                @db.VarChar(255)
   antecedentesImagen String?                @db.VarChar(255)
   fechaRegistro      DateTime               @default(now()) @db.Timestamp(0)
-  Imagen             String?                @db.VarChar(255)
+  imagen             String?                @db.VarChar(255)
+  imagenCarro        String?                @db.VarChar(255)
+  carro              String?                @db.VarChar(255)
   tipoCarro          conductores_tipoCarro? @default(normal)
-  estado             Boolean               @default(true)
+  estado             Boolean                @default(true)
   viajes             viajes[]
 }
 
@@ -63,13 +79,15 @@ model viajes {
   fecha                DateTime?          @default(now()) @db.Timestamp(0)
   duracion             String?            @db.VarChar(255)
   conductorId          Int
-  monto                Float              
-  porcentajeDeducccion Float              
-  metodoPago           viajes_metodoPago @default(Efectivo)
+  monto                Float?              
+  porcentajeDeducccion Float?              
+  metodoPago           viajes_metodoPago? 
   clientes             clientes          @relation(fields: [clienteId], references: [id])
   conductores          conductores       @relation(fields: [conductorId], references: [id])
   quejas               quejas[]
-
+  iniciado              Boolean          @default(false) 
+  cancelado             Boolean          @default(false) 
+  finalizado            Boolean          @default(false) 
   @@index([conductorId], map: "viajes_ibfk_1")
   @@index([clienteId], map: "viajes_ibfk_2")
 }

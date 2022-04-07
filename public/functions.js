@@ -119,9 +119,9 @@ function crearMarcador({ lat, lng, kms, minutes }) {
 
 /**
  *
- * @param {{text:string,place_name_es:string,center?:[number,number]}} param0
+ * @param {{text:string,place_name_es:string,center?:[number,number],onclick?:(e:any)=>void}} param0
  */
-function createResult({ text, place_name_es, center }) {
+function createResult({ text, place_name_es, center, onclick }) {
   const t = d.createElement("template");
   t.innerHTML = `
           <div class="search-result cursor-pointer">
@@ -133,13 +133,16 @@ function createResult({ text, place_name_es, center }) {
           </p> 
         </div>
           `;
-  console.log("keyup");
   if (center) {
     t.content.querySelector("div").onclick = async () => {
       console.log(center);
       const res = await trazarRuta({ lat: center[1], lng: center[0] });
       crearMarcador({ lat: center[1], lng: center[0], ...res });
+      mostrarConductores(place_name_es);
     };
+  }
+  if (onclick) {
+    t.content.querySelector("div").onclick = onclick;
   }
   searchrResults.append(t.content);
 }
@@ -208,4 +211,40 @@ async function trazarRuta({ lat, lng }) {
     minutes,
     kms,
   };
+}
+
+async function mostrarConductores(destino) {
+  searchrResults.innerHTML = "";
+  const res = await fetch("/conductores");
+  let data = await res.json();
+  if (!data.length) {
+    createResult({
+      text: "Sin resultados ",
+      place_name_es: "No se encontraron conductores en su area",
+    });
+    return;
+  }
+  console.log(data);
+  //text, place_name_es, center
+  data = data.map((c) => ({
+    text: c.nombre,
+    place_name_es: c.carro || c.correo,
+    onclick: () => {
+      fetch("/viajes", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        method: "post",
+        body: JSON.stringify({
+          conductor: c.id,
+          destino,
+        }),
+      }).then(() => {
+        location.href = "/viajes";
+      });
+    },
+  }));
+
+  data.forEach(createResult);
 }
