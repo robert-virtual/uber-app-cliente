@@ -6,7 +6,7 @@ const { cookiename } = require("../constantes");
 const prisma = new PrismaClient();
 
 exports.login = async (req = request, res = response) => {
-  const { tipo } = req.body;
+  const { tipo } = req.body; // conductor o cliente
 
   const { correo, clave } = req.body;
   try {

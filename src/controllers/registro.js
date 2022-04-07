@@ -31,7 +31,8 @@ exports.postregistro = async (req = request, res = response) => {
       });
     }
     req.session.userid = usuario.id;
-    req.session.tipoUser = tipo;
+    req.session.conductor = tipo == "Conductores";
+    req.session.cliente = tipo != "Conductores";
 
     res.redirect("/mapa");
   } catch (error) {
