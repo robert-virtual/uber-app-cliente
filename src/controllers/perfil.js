@@ -3,7 +3,7 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 exports.postPerfil = async (req = request, res = response) => {
-  let { tipoUser } = req.session;
+  let { conductor } = req.session;
   console.log("postPerfil: body:", req.body);
   try {
     if (req.file) {
@@ -14,7 +14,7 @@ exports.postPerfil = async (req = request, res = response) => {
 
     let usuario;
     req.body.ciudadId = Number(req.body.ciudadId);
-    if (tipoUser == "Conductores") {
+    if (conductor) {
       usuario = await prisma.conductores.update({
         data: req.body,
         where: {
@@ -31,9 +31,7 @@ exports.postPerfil = async (req = request, res = response) => {
     }
     console.log("postPerfil: usuario:");
     console.log(usuario);
-    res.render("perfil", {
-      usuario,
-    });
+    res.redirect("/perfil");
   } catch (error) {
     console.log(error);
     res.render("perfil", {
@@ -72,6 +70,7 @@ exports.getPerfil = async (req = request, res = response) => {
       },
     },
   });
+  console.log(usuario);
   res.render("perfil", {
     usuario,
     conductor: req.session.conductor,
