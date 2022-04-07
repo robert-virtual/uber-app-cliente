@@ -20,13 +20,13 @@ exports.getViajes = async (req = request, res = response) => {
   if (!req.session.userid) {
     return res.redirect("/");
   }
-  let where={
+  let where = {
     clienteId: Number(req.session.userid),
     cancelado: false,
-  }
-  if (req.session.conductor){
-    where.conductorId= Number(req.session.userid)
-    where.clienteId= undefined
+  };
+  if (req.session.conductor) {
+    where.conductorId = Number(req.session.userid);
+    where.clienteId = undefined;
   }
   const viajes = await prisma.viajes.findMany({
     select: {
@@ -59,7 +59,7 @@ exports.getViajes = async (req = request, res = response) => {
         },
       },
     },
-    where
+    where,
   });
   console.log("viajes:", viajes);
   res.render("viajes", {
