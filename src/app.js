@@ -57,9 +57,6 @@ app.use(async (req, _, next) => {
     app.locals.cliente = cliente;
     app.locals.conductor = conductor;
     app.locals.perfil = perfil;
-    console.log("middleware locals");
-    console.log("cliente", !conductor);
-    console.log("conductor", conductor);
 
     return next();
   }

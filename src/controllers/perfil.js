@@ -40,7 +40,7 @@ exports.postPerfil = async (req = request, res = response) => {
         },
       });
     }
-    res.app.locals.perfil = usuario.imagen;
+    req.session.perfil = usuario.imagen;
     res.redirect("/perfil");
   } catch (error) {
     console.log(error);
