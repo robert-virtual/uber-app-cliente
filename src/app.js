@@ -5,6 +5,8 @@ const app = express();
 const { cookiename, __prod__ } = require("./constantes");
 if (!__prod__) {
   require("dotenv").config();
+  const morgan = require("morgan");
+  app.use(morgan("dev"));
 }
 const session = require("express-session");
 const { engine } = require("express-handlebars");
